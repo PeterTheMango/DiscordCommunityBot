@@ -9,6 +9,9 @@ async function registerUserCooldowns() {
         if (cl.type === "allTimeXP" || cl.type === "weeklyXP" || cl.type === "dailylb_reset") {
             return;
         } else {
+            if (cl.type.includes(`Msg`)) return;
+
+
             setTimeout(() => model.findOneAndDelete({
                 discord_id: cl.discord_id,
                 type: cl.type
