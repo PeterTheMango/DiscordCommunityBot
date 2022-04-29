@@ -32,6 +32,8 @@ class Cooldown {
 
             await cooldownInstance.save().catch(err => console.log(err));
 
+            return cooldownInstance;
+
         } else {
             cooldownInstance = new model({
                 discord_id: this.member_id,
