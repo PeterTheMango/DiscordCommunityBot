@@ -86,7 +86,6 @@ module.exports = class extends Command {
                 discord_id: message.member.id,
                 type: "RobMsg"
             });
-            console.log(hasCooldown2)
             return message.channel.send({
                 embeds: [
                     cooldownEmbed.setDescription(
