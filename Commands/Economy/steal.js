@@ -86,6 +86,7 @@ module.exports = class extends Command {
                 discord_id: message.member.id,
                 type: "RobMsg"
             });
+            console.log(hasCooldown2)
             return message.channel.send({
                 embeds: [
                     cooldownEmbed.setDescription(
@@ -93,7 +94,7 @@ module.exports = class extends Command {
                         .replace(`{time}`, format(hasCooldown.end - Date.now(), {
                             round: true
                         }))
-                        .replace(`{msg}`, hasCooldown2.end)
+                        .replace(`{msg}`, `hasCooldown2.end`)
                     )
                 ]
             });
