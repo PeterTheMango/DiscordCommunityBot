@@ -19,16 +19,24 @@ module.exports = class extends Event {
         });
 
         if (hasRobCooldown) {
-            let newCooldown = await CooldownManager.findOneAndUpdate({
-                discord_id: message.member.id,
-                type: "RobMsg"
-            }, {
-                discord_id: hasRobCooldown.discord_id,
-                type: hasRobCooldown.type,
-                end: hasRobCooldown.end - 1
-            }, {
-                new: true
-            });
+
+            if (hasRobCooldown.end > 0) {
+                let newCooldown = await CooldownManager.findOneAndUpdate({
+                    discord_id: message.member.id,
+                    type: "RobMsg"
+                }, {
+                    discord_id: hasRobCooldown.discord_id,
+                    type: hasRobCooldown.type,
+                    end: hasRobCooldown.end - 1
+                }, {
+                    new: true
+                });
+            } else {
+                await CooldownManager.findOneAndDelete({
+                    discord_id: message.member.id,
+                    type: "RobMsg"
+                });
+            }
         }
 
         if (![`192715014602358784`, `376308669576511500`].includes(message.author.id)) return;
