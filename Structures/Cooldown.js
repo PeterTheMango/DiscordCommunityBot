@@ -19,19 +19,34 @@ class Cooldown {
      * @returns {Promise<*>} Saves the cooldown to the database.
      */
     async save() {
-        let cooldownInstance = new model({
-            discord_id: this.member_id,
-            type: this.type,
-            end: this.end
-        });
 
-        await cooldownInstance.save().catch(err => console.log(err));
-        setTimeout(() => {
-            model.findOneAndDelete({
+        let cooldownInstance;
+
+        if (this.type.includes(`Msg`)) {
+
+            cooldownInstance = new model({
                 discord_id: this.member_id,
-                type: this.type
-            }).catch(err => console.log(err));
-        }, this.end - Date.now());
+                type: this.type,
+                end: this.end
+            });
+
+            await cooldownInstance.save().catch(err => console.log(err));
+
+        } else {
+            cooldownInstance = new model({
+                discord_id: this.member_id,
+                type: this.type,
+                end: this.end
+            });
+
+            await cooldownInstance.save().catch(err => console.log(err));
+            setTimeout(() => {
+                model.findOneAndDelete({
+                    discord_id: this.member_id,
+                    type: this.type
+                }).catch(err => console.log(err));
+            }, this.end - Date.now());
+        }
 
         return cooldownInstance;
     }

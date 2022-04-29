@@ -432,7 +432,7 @@ async function startLeaderboards(guild) {
         let lbMessage = await lbChannel.messages.fetch(record.message_id).catch(err => {
             console.log(`Unable to find message with the id of ${record.discord_id}`)
             lb_msg = null
-		});
+        });
         if (!lbMessage) {
             await Cooldown.findOneAndDelete({
                 discord_id: record.message_id
