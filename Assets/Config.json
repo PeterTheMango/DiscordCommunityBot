@@ -1,0 +1,30 @@
+{
+    "token": "NzQyNTEwMTE4Mjg1MDgyNzE2.XzHKbw.UFZoL584MRyo5RA9O-tcv2VZoY4",
+    "database": {
+        "username": "nyaa",
+        "password": "WTHaBwGVtr2UZ",
+        "host": "clients.peterthemango.me",
+        "port": "25718"
+    },
+    "channels": {
+        "bot_logs": "895352087431479316",
+        "welcome_channel": "790439605655699456",
+        "command_channels": [],
+        "chatting_channels": []
+    },
+    "economy": {
+        "daily_reward": 1000,
+        "daily_cooldown": 86400000,
+        "work_reward": 250,
+        "work_cooldown": 900000,
+        "bet": {
+            "fail_rate": 28,
+            "max_return": 2,
+            "mininum_bet": 100
+        }
+    },
+    "moderation": {
+        "mute_role": "951952188752687135",
+        "novc_role": "951960547019071529"
+    }
+}
