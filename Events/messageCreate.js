@@ -20,7 +20,7 @@ module.exports = class extends Event {
 
         if (hasRobCooldown) {
 
-            if (hasRobCooldown.end > 0) {
+            if (hasRobCooldown.end > 1) {
                 let newCooldown = await CooldownManager.findOneAndUpdate({
                     discord_id: message.member.id,
                     type: "RobMsg"
@@ -35,6 +35,10 @@ module.exports = class extends Event {
                 await CooldownManager.findOneAndDelete({
                     discord_id: message.member.id,
                     type: "RobMsg"
+                });
+                await CooldownManager.findOneAndDelete({
+                    discord_id: message.member.id,
+                    type: "Rob"
                 });
             }
         }
