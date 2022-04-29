@@ -54,7 +54,7 @@ module.exports = class extends Command {
 
         const failedEmbed = new MessageEmbed({
             color: 'RED',
-            description: `${message.member} <a:egp_no:935209428070854717> You got caught stealing from {user}! You paid a **{fee}** credits.`
+            description: `${message.member} <a:egp_no:935209428070854717> You got caught stealing from {user}! You paid a fee of **{fee}** credits.`
         });
 
         const cooldownEmbed = new MessageEmbed({
@@ -91,10 +91,9 @@ module.exports = class extends Command {
                     cooldownEmbed.setDescription(
                         cooldownEmbed.description
                         .replace(`{time}`, format(hasCooldown.end - Date.now(), {
-                                round: true
-                            })
-                            .replace(`{msg}`, hasCooldown2.end)
-                        )
+                            round: true
+                        }))
+                        .replace(`{msg}`, hasCooldown2.end)
                     )
                 ]
             });
