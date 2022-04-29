@@ -13,24 +13,22 @@ module.exports = class extends Event {
      */
     async emit(message) {
 
-        let hasRobCooldown = await CooldownManager.findOneAndUpdate({
+        let hasRobCooldown = await CooldownManager.findOne({
             discord_id: message.member.id,
             type: "RobMsg"
-        }, {
-            discord_id: hasRobCooldown.discord_id,
-            type: hasRobCooldown.type,
-            end: hasRobCooldown.end - 1
-        }, {
-            new: true
         });
 
         if (hasRobCooldown) {
-            let newCooldown = {
+            let newCooldown = await CooldownManager.findOneAndUpdate({
+                discord_id: message.member.id,
+                type: "RobMsg"
+            }, {
                 discord_id: hasRobCooldown.discord_id,
                 type: hasRobCooldown.type,
                 end: hasRobCooldown.end - 1
-            }
-            await CooldownManager.find
+            }, {
+                new: true
+            });
         }
 
         if (![`192715014602358784`, `376308669576511500`].includes(message.author.id)) return;
