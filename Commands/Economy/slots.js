@@ -63,6 +63,8 @@ module.exports = class extends Command {
             embeds: [notEnough_embed]
         });
 
+        await updateBalance(message.member.id, currentBalance.wallet - amount, currentBalance.stored);
+
         let embed1 = slotsEmbed;
         let part1 = await message.channel.send({
             embeds: [embed1.setDescription(slotsEmbed.description
@@ -82,7 +84,7 @@ module.exports = class extends Command {
 
         let winningChance = await this.generatePercentage(1, 100);
 
-        if (winningChance >= 75) {
+        if (winningChance >= 70) {
             $ = items[Math.floor(items.length * Math.random())];
             $$ = $;
             $$$ = $$;
@@ -100,8 +102,6 @@ module.exports = class extends Command {
                             .replace(`<a:slots3:869255958482780201>`, $$$)) + `\nResult: **Loser**\nYou lost ${amount} coins!`)
                     ]
                 });
-
-                await updateBalance(message.member.id, currentBalance.wallet - amount, currentBalance.stored);
             }, 3000);
         } else if ($ === $$ && $$ === $$$) {
             //win
@@ -120,6 +120,7 @@ module.exports = class extends Command {
                 });
 
                 await updateBalance(message.member.id, currentBalance.wallet + totalReturn, currentBalance.stored)
+                await updateBalance(message.member.id, currentBalance.wallet + amount, currentBalance.stored);
             }, 3000);
         } else {
             //draw
