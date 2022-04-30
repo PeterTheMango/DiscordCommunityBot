@@ -124,7 +124,7 @@ module.exports = class extends Command {
 
                 console.log(totalReturn);
 
-                await updateBalance(message.member.id, currentBalance.wallet + totalReturn + amount, currentBalance.stored);
+                await updateBalance(message.member.id, (currentBalance.wallet + totalReturn), currentBalance.stored);
             }, 3000);
         } else {
             //draw
