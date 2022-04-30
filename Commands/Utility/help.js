@@ -53,6 +53,10 @@ module.exports = class extends Command {
                     inline: true
                 }
             ]
+        });
+
+        await message.channel.send({
+            embdes: [helpEmbed]
         })
 
     }
