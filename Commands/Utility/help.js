@@ -24,7 +24,7 @@ module.exports = class extends Command {
     async execute(message, args) {
 
         let helpEmbed = new MessageEmbed({
-            color: "LUMINOUS_VIVID_PINK",
+            color: "#F7B7FD",
             author: {
                 name: `E-Girl Paradise`,
                 iconURL: `https://cdn.discordapp.com/icons/727649662475173962/a_b0e71799d16f310bfde4182ee2ae96e6.gif`
