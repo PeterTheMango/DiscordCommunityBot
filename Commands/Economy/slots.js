@@ -109,7 +109,7 @@ module.exports = class extends Command {
             //win
             setTimeout(async () => {
 
-                let returnPercentage = await this.generatePercentage(100, 120);
+                let returnPercentage = await this.generatePercentage(110, 120);
                 let totalReturn = Math.ceil((returnPercentage / 100) * amount);
 
                 await part1.edit({
