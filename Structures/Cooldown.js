@@ -46,7 +46,7 @@ class Cooldown {
             setTimeout(() => {
 
                 if (this.type === "Rob") {
-                    await model.findOneAndDelete({
+                    model.findOneAndDelete({
                         discord_id: this.member_id,
                         type: "RobMsg"
                     }).catch(err => console.log(err));
