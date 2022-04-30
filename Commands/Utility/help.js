@@ -39,25 +39,21 @@ module.exports = class extends Command {
             },
             fields: [{
                     name: `💰 Economy 💰`,
-                    value: "`.bet` `.bal` `.work` `.daily`\n`.steal` `.pick` `.give` `.slots`\n`.store` `.take` `.claim` `.steal`",
+                    value: ".bet .bal .work .daily .steal .pick .give .slots .store .take .claim .steal",
                     inline: true
                 },
                 {
                     name: `💬 Activity 💬`,
-                    value: "`.chat` `.vc` `.rank`\n`.dms on` `.dms off`",
+                    value: ".chat .vc .rank .dms on .dms off",
                     inline: true
                 },
                 {
                     name: `👥 Gangs [WIP]`,
-                    value: "`.create` `.info` `.promote`\n`.demote` `.disband`\n`.kick` `.leave`",
+                    value: `.create .info .promote .demote .disband .kick .leave`,
                     inline: true
                 }
             ]
-        });
-
-        await message.channel.send({
-            embeds: [helpEmbed]
-        });
+        })
 
     }
 
