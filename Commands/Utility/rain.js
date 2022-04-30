@@ -35,9 +35,15 @@ module.exports = class extends Command {
         if (!user) return message.reply(`That user does not exist!`);
 
         if (user.roles.cache.get(role.id)) {
-            await user.roles.remove(role.id).then(message.react(`✅`)).catch(err => console.log(err) && await message.react(`❌`));
+            await user.roles.remove(role.id).then(message.react(`✅`)).catch(err => {
+                console.log(err);
+                message.react(`❌`);
+            });
         } else {
-            await user.roles.add(role.id).then(message.react(`✅`)).catch(err => console.log(err) && await message.react(`❌`));
+            await user.roles.add(role.id).then(message.react(`✅`)).catch(err => {
+                console.log(err);
+                message.react(`❌`);
+            });
         }
 
     }
