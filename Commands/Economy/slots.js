@@ -84,6 +84,8 @@ module.exports = class extends Command {
 
         let winningChance = await this.generatePercentage(1, 100);
 
+        console.log(winningChance);
+
         if (winningChance >= 70) {
             $ = items[Math.floor(items.length * Math.random())];
             $$ = $;
@@ -107,7 +109,8 @@ module.exports = class extends Command {
             //win
             setTimeout(async () => {
 
-                let totalReturn = Math.ceil((await this.generatePercentage(110, 120) / 100) * amount);
+                let returnPercentage = await this.generatePercentage(100, 120);
+                let totalReturn = Math.ceil((returnPercentage / 100) * amount);
 
                 await part1.edit({
                     embeds: [
@@ -121,8 +124,7 @@ module.exports = class extends Command {
 
                 console.log(totalReturn);
 
-                await updateBalance(message.member.id, currentBalance.wallet + totalReturn, currentBalance.stored)
-                await updateBalance(message.member.id, currentBalance.wallet + amount, currentBalance.stored);
+                await updateBalance(message.member.id, currentBalance.wallet + totalReturn + amount, currentBalance.stored);
             }, 3000);
         } else {
             //draw

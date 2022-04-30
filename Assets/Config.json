@@ -19,7 +19,7 @@
         "work_cooldown": 900000,
         "bet": {
             "fail_rate": 28,
-            "max_return": 200,
+            "max_return": 150,
             "mininum_bet": 100
         }
     },
