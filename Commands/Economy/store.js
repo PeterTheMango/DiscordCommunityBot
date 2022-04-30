@@ -29,7 +29,7 @@ module.exports = class extends Command {
 
         // Embeds
         let notEnough_embed = new MessageEmbed({
-            description: `${message.member} <a:egp_no:935209428070854717> You do not have that amount to store!!`,
+            description: `${message.member} <a:egp_no:935209428070854717> You do not have that amount to store!`,
             color: `RED`
         });
 
@@ -37,12 +37,12 @@ module.exports = class extends Command {
             description: `${message.member} <a:tickticktick:935198882172903434> Successfully stored %amount% credits to your bank!`,
             color: "GREEN"
         });
-        
+
         let notEnoughArgs_embed = new MessageEmbed({
             description: `${message.member} <:egp_info:884216504336416829> Command usage: \`.store amount!\``,
             color: `RED`
         });
-        
+
         if (args.length < 1) return message.channel.send({
             embeds: [notEnoughArgs_embed]
         });

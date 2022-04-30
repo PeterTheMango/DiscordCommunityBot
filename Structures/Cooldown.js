@@ -42,7 +42,16 @@ class Cooldown {
             });
 
             await cooldownInstance.save().catch(err => console.log(err));
+
             setTimeout(() => {
+
+                if (this.type === "Rob") {
+                    await model.findOneAndDelete({
+                        discord_id: this.member_id,
+                        type: "RobMsg"
+                    }).catch(err => console.log(err));
+                }
+
                 model.findOneAndDelete({
                     discord_id: this.member_id,
                     type: this.type
