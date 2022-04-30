@@ -82,7 +82,7 @@ module.exports = class extends Command {
 
         let winningChance = await this.generatePercentage(1, 100);
 
-        if (winningChance >= 45) {
+        if (winningChance >= 75) {
             $ = items[Math.floor(items.length * Math.random())];
             $$ = $;
             $$$ = $$;
