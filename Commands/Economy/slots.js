@@ -138,6 +138,8 @@ module.exports = class extends Command {
                             .replace(`<a:slots3:869255958482780201>`, $$$)) + `\nResult: **Draw**\nYou didn't lose any coins!`)
                     ]
                 });
+
+                await updateBalance(message.member.id, currentBalance.wallet + amount, currentBalance.stored);
             }, 3000);
         }
 
