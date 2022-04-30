@@ -12,10 +12,20 @@ async function registerUserCooldowns() {
             if (cl.type.includes(`Msg`)) return;
 
 
-            setTimeout(() => model.findOneAndDelete({
-                discord_id: cl.discord_id,
-                type: cl.type
-            }).catch(err => console.log(err)), cl.end - Date.now())
+            setTimeout(() => {
+
+                if (cl.type === "Rob") {
+                    model.findOneAndDelete({
+                        discord_id: cl.discord_id,
+                        type: `RobMsg`
+                    }).catch(err => console.log(err));
+                }
+
+                model.findOneAndDelete({
+                    discord_id: cl.discord_id,
+                    type: cl.type
+                }).catch(err => console.log(err));
+            }, cl.end - Date.now())
         }
     })
 
