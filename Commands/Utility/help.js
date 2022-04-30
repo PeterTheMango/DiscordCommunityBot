@@ -56,7 +56,7 @@ module.exports = class extends Command {
         });
 
         await message.channel.send({
-            embdes: [helpEmbed]
+            embeds: [helpEmbed]
         })
 
     }
