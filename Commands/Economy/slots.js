@@ -63,7 +63,7 @@ module.exports = class extends Command {
 
         let currentBalance = await getBalance(message.member.id);
 
-        if (amount > currentBalance.wallet) return message.channel.send({
+        if (amount > currentBalance.wallet || amount < 1) return message.channel.send({
             embeds: [notEnough_embed]
         });
 

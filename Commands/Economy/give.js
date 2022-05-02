@@ -65,8 +65,6 @@ module.exports = class extends Command {
             user = await message.guild.members.fetch(args.shift()).catch(err => user = null);
         }
 
-        
-
         if (!user) return message.channel.send({
             embeds: [noUserEmbed]
         });
