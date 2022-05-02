@@ -2,7 +2,10 @@ const {
     Message,
     MessageEmbed
 } = require("discord.js");
-const { getBalance, updateBalance } = require("../../Handlers/EconomyHandler");
+const {
+    getBalance,
+    updateBalance
+} = require("../../Handlers/EconomyHandler");
 const Command = require(`../../Structures/Command`);
 
 module.exports = class extends Command {
@@ -40,6 +43,11 @@ module.exports = class extends Command {
             description: `${message.member} <a:egp_no:935209428070854717> You are not allowed to transfer money to yourself!`
         });
 
+        const noBotEmbed = new MessageEmbed({
+            color: 'RED',
+            description: `${message.member} <a:egp_no:935209428070854717> You cannot give credits to a bot!`
+        });
+
         const noNumberEmbed = new MessageEmbed({
             color: 'RED',
             description: `${message.member} <a:egp_no:935209428070854717> Please provide a **number** amount to give to that user!`
@@ -57,24 +65,34 @@ module.exports = class extends Command {
             user = await message.guild.members.fetch(args.shift()).catch(err => user = null);
         }
 
-        if (!user) return message.channel.send({ embeds: [noUserEmbed] });
+        if (!user) return message.channel.send({
+            embeds: [noUserEmbed]
+        });
 
-        if (user.id === message.member.id) return message.channel.send({embeds: [noSelfEmbed]});
+        if (user.user.bot) return message.channel.send({
+            embeds: [noBotEmbed]
+        });
+
+        if (user.id === message.member.id) return message.channel.send({
+            embeds: [noSelfEmbed]
+        });
 
         let amount = args.shift();
 
-        if (isNaN(parseInt(amount)) && amount !== "all") return message.channel.send({ embeds: [noNumberEmbed] });
+        if (isNaN(parseInt(amount)) && amount !== "all") return message.channel.send({
+            embeds: [noNumberEmbed]
+        });
 
         let selfBalance = await getBalance(message.member.id);
         let userBalance = await getBalance(user.id);
 
         if (amount === 'all') {
             amount = selfBalance.wallet;
-        } else { 
+        } else {
             amount = parseInt(amount);
         }
 
-        if (amount > selfBalance.wallet) return message.channel.send(`<a:egp_no:935209428070854717> ${message.member} **You do not have sufficient credits to give!**`);
+        if (amount > selfBalance.wallet || amount < 1) return message.channel.send(`<a:egp_no:935209428070854717> ${message.member} **You do not have sufficient credits to give!**`);
 
         await updateBalance(message.member.id, selfBalance.wallet - amount, selfBalance.stored);
         await updateBalance(user.id, userBalance.wallet + amount, userBalance.stored);

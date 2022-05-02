@@ -55,7 +55,11 @@ module.exports = class extends Command {
 
         if (isNaN(parseInt(amount))) return message.channel.send(`**How to use the command?**\n\n\`.slots <amount>\``);
 
-        amount = parseInt(amount);
+        if (amount === 'all') {
+            amount = selfBalance.wallet;
+        } else { 
+            amount = parseInt(amount);
+        }
 
         let currentBalance = await getBalance(message.member.id);
 
@@ -83,8 +87,6 @@ module.exports = class extends Command {
         let embed2 = slotsEmbed;
 
         let winningChance = await this.generatePercentage(1, 100);
-
-        console.log(winningChance);
 
         if (winningChance >= 70) {
             $ = items[Math.floor(items.length * Math.random())];
@@ -121,8 +123,6 @@ module.exports = class extends Command {
                             .replace(`<a:slots3:869255958482780201>`, $$$)) + `\nResult: **Winner**\nYou gained ${totalReturn} coins!`)
                     ]
                 });
-
-                console.log(totalReturn);
 
                 await updateBalance(message.member.id, (currentBalance.wallet + totalReturn), currentBalance.stored);
             }, 3000);

@@ -47,6 +47,16 @@ module.exports = class extends Command {
             description: `${message.member} <a:egp_no:935209428070854717> You cannot rob users with less than 100 coins!`
         });
 
+        const selfEmbed = new MessageEmbed({
+            color: 'RED',
+            description: `${message.member} <a:egp_no:935209428070854717> You cannot rob yourself.`
+        });
+
+        const noBotEmbed = new MessageEmbed({
+            color: 'RED',
+            description: `${message.member} <a:egp_no:935209428070854717> You cannot steal from bot accounts.`
+        });
+
         const stolenEmbed = new MessageEmbed({
             color: 'GREEN',
             description: `${message.member} <a:tickticktick:935198882172903434> You successfully stole **{amount}** credits from {user}`
@@ -74,6 +84,14 @@ module.exports = class extends Command {
 
         if (!user) return message.channel.send({
             embeds: [noUserEmbed]
+        });
+
+        if (user.user.bot) return message.channel.send({
+            embeds: [noBotEmbed]
+        });
+
+        if (user.id === message.member.id) return message.channel.send({
+            embeds: [selfEmbed]
         });
 
         let hasCooldown = await CooldownManager.findOne({

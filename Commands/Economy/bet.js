@@ -58,7 +58,7 @@ module.exports = class extends Command {
             amount = parseInt(amount);
         }
 
-        if (amount < Config.economy.bet.mininum_bet) return message.channel.send(`${message.member} <:777:935206815124291594> You can bet a minimum amount of **${Config.economy.bet.mininum_bet}** credits <:coinegp:935198385902850058>`);
+        if (amount < Config.economy.bet.mininum_bet || amount < 1) return message.channel.send(`${message.member} <:777:935206815124291594> You can bet a minimum amount of **${Config.economy.bet.mininum_bet}** credits <:coinegp:935198385902850058>`);
 
         if (amount > userBalance.wallet) return message.channel.send({
             embeds: [noNumberEmbed]

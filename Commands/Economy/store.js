@@ -61,7 +61,7 @@ module.exports = class extends Command {
             amount = parseInt(amount);
         }
 
-        if (amount > userBalance.wallet) return message.channel.send({
+        if (amount > userBalance.wallet || amount < 1) return message.channel.send({
             embeds: [notEnough_embed]
         });
 
