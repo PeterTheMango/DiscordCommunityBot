@@ -56,6 +56,9 @@ module.exports = class extends Command {
             if(m.roles.cache.get(roles[0])){
                 return Level.findOneAndUpdate({discord_id: m.id},{
                     $set:{
+                        discord_id: m.id,
+                        xp: 0,
+                        time: 0,
                         level: 83
                     }
                 },{
@@ -65,6 +68,9 @@ module.exports = class extends Command {
             } else if(m.roles.cache.get(roles[1])){
                 return Level.findOneAndUpdate({discord_id: m.id},{
                     $set:{
+                        discord_id: m.id,
+                        xp: 0,
+                        time: 0,
                         level: 78
                     }
                 },{
@@ -74,6 +80,9 @@ module.exports = class extends Command {
             } else if(m.roles.cache.get(roles[2])){
                 return Level.findOneAndUpdate({discord_id: m.id},{
                     $set:{
+                        discord_id: m.id,
+                        xp: 0,
+                        time: 0,
                         level: 73
                     }
                 },{
@@ -83,6 +92,9 @@ module.exports = class extends Command {
             }else if(m.roles.cache.get(roles[3])){
                 return Level.findOneAndUpdate({discord_id: m.id},{
                     $set:{
+                        discord_id: m.id,
+                        xp: 0,
+                        time: 0,
                         level: 68
                     }
                 },{
@@ -92,6 +104,9 @@ module.exports = class extends Command {
             }else if(m.roles.cache.get(roles[4])){
                 return Level.findOneAndUpdate({discord_id: m.id},{
                     $set:{
+                        discord_id: m.id,
+                        xp: 0,
+                        time: 0,
                         level: 63
                     }
                 },{
@@ -101,6 +116,9 @@ module.exports = class extends Command {
             }else if(m.roles.cache.get(roles[5])){
                 return Level.findOneAndUpdate({discord_id: m.id},{
                     $set:{
+                        discord_id: m.id,
+                        xp: 0,
+                        time: 0,
                         level: 58
                     }
                 },{
@@ -110,6 +128,9 @@ module.exports = class extends Command {
             }else if(m.roles.cache.get(roles[6])){
                 return Level.findOneAndUpdate({discord_id: m.id},{
                     $set:{
+                        discord_id: m.id,
+                        xp: 0,
+                        time: 0,
                         level: 53
                     }
                 },{
@@ -119,6 +140,9 @@ module.exports = class extends Command {
             }else if(m.roles.cache.get(roles[7])){
                 return Level.findOneAndUpdate({discord_id: m.id},{
                     $set:{
+                        discord_id: m.id,
+                        xp: 0,
+                        time: 0,
                         level: 48
                     }
                 },{
@@ -129,6 +153,9 @@ module.exports = class extends Command {
             else if(m.roles.cache.get(roles[8])){
                 return Level.findOneAndUpdate({discord_id: m.id},{
                     $set:{
+                        discord_id: m.id,
+                        xp: 0,
+                        time: 0,
                         level: 43
                     }
                 },{
@@ -138,6 +165,9 @@ module.exports = class extends Command {
             }else if(m.roles.cache.get(roles[9])){
                 return Level.findOneAndUpdate({discord_id: m.id},{
                     $set:{
+                        discord_id: m.id,
+                        xp: 0,
+                        time: 0,
                         level: 38
                     }
                 },{
@@ -148,6 +178,9 @@ module.exports = class extends Command {
             else if(m.roles.cache.get(roles[10])){
                 return Level.findOneAndUpdate({discord_id: m.id},{
                     $set:{
+                        discord_id: m.id,
+                        xp: 0,
+                        time: 0,
                         level: 33
                     }
                 },{
@@ -157,6 +190,9 @@ module.exports = class extends Command {
             }else if(m.roles.cache.get(roles[11])){
                 return Level.findOneAndUpdate({discord_id: m.id},{
                     $set:{
+                        discord_id: m.id,
+                        xp: 0,
+                        time: 0,
                         level: 28
                     }
                 },{
@@ -166,6 +202,9 @@ module.exports = class extends Command {
             }else if(m.roles.cache.get(roles[12])){
                 return Level.findOneAndUpdate({discord_id: m.id},{
                     $set:{
+                        discord_id: m.id,
+                        xp: 0,
+                        time: 0,
                         level: 23
                     }
                 },{
@@ -175,6 +214,9 @@ module.exports = class extends Command {
             }else if(m.roles.cache.get(roles[13])){
                 return Level.findOneAndUpdate({discord_id: m.id},{
                     $set:{
+                        discord_id: m.id,
+                        xp: 0,
+                        time: 0,
                         level: 18
                     }
                 },{
@@ -184,6 +226,9 @@ module.exports = class extends Command {
             }else if(m.roles.cache.get(roles[14])){
                 return Level.findOneAndUpdate({discord_id: m.id},{
                     $set:{
+                        discord_id: m.id,
+                        xp: 0,
+                        time: 0,
                         level: 13
                     }
                 },{
@@ -193,6 +238,9 @@ module.exports = class extends Command {
             }else if(m.roles.cache.get(roles[15])){
                 return Level.findOneAndUpdate({discord_id: m.id},{
                     $set:{
+                        discord_id: m.id,
+                        xp: 0,
+                        time: 0,
                         level: 8
                     }
                 },{
@@ -203,6 +251,9 @@ module.exports = class extends Command {
             else if(m.roles.cache.get(roles[16])){
                 return Level.findOneAndUpdate({discord_id: m.id},{
                     $set:{
+                        discord_id: m.id,
+                        xp: 0,
+                        time: 0,
                         level: 3
                     }
                 },{
