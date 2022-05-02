@@ -35,7 +35,7 @@ module.exports = class extends Command {
 
         if (!wXP) {
             return message.channel.send({
-                embed: [embed.setDescription(`NO DATA FOUND`)]
+                embeds: [embed.setDescription(`NO DATA FOUND`)]
             });
         }
 
