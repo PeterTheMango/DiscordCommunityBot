@@ -41,7 +41,7 @@ module.exports = class extends Command {
 
         await message.channel.send({
             embeds: [embed.setDescription(embed.description.replace(`time`, format(wXP.time)))]
-        });
+        })
 
     }
 
