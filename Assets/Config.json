@@ -1,5 +1,8 @@
 {
-    "token": "NzQyNTEwMTE4Mjg1MDgyNzE2.XzHKbw.UFZoL584MRyo5RA9O-tcv2VZoY4",
+    "token": "NzQyNTEwMTE4Mjg1MDgyNzE2.XzHKbw.rcdOEP54Z7EYc6TmWwRPNkP1-WI",
+    "novcRole": "767533847990239282",
+    "helperRole": "750950886666403875",
+    "vcMod": "750950886666403875",
     "database": {
         "username": "nyaa",
         "password": "WTHaBwGVtr2UZ",
@@ -18,9 +21,9 @@
         "work_reward": 250,
         "work_cooldown": 900000,
         "bet": {
-            "fail_rate": 28,
-            "max_return": 150,
-            "mininum_bet": 100
+            "fail_rate": 53,
+            "max_return": 110,
+            "mininum_bet": 50
         }
     },
     "moderation": {
