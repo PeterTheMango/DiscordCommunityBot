@@ -7,18 +7,6 @@ const {
 } = require("discord.js");
 const Balance = require(`../Models/Balance`);
 
-/*
-    Leaderboard Holder
-    {
-        discord_id: String,
-        amount: Number
-    }
-
-    reset every 12 am system time.
-    updates every 5 minutes
-
-*/
-
 /**
  * 
  * @param {TextChannel} channel 

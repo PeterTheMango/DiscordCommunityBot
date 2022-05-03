@@ -69,8 +69,6 @@ module.exports = class extends Command {
 
         await updateBalance(message.member.id, currentBalance.wallet - amount, currentBalance.stored);
 
-        currentBalance = await getBalance(message.member.id);
-
         let embed1 = slotsEmbed;
         let part1 = await message.channel.send({
             embeds: [embed1.setDescription(slotsEmbed.description
