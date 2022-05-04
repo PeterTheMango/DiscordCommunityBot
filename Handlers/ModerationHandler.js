@@ -149,7 +149,7 @@ async function muteUser(user, moderator, reason) {
     let banRole = await user.guild.roles.cache.get(moderation.mute_role);
     if (!banRole) {
         userBanned = false;
-        console.log(`Unable to voice ban users! muteRole not setup.`);
+        console.log(`Unable to mute users! muteRole not setup.`);
         return userBanned;
     }
 
