@@ -103,8 +103,8 @@ module.exports = class extends Command {
         });
 
         let userVoiceBanned = await noVcUser(user, message.member, reason);
-        if (message.member.voice.channel) {
-            await message.member.voice.disconnect();
+        if (user.voice.channel) {
+            await user.voice.disconnect();
         }
 
         if (!userVoiceBanned) return message.channel.send({
