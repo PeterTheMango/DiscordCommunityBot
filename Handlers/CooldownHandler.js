@@ -15,7 +15,7 @@ async function registerUserCooldowns() {
             if (cl.type.includes(`Msg`)) return;
 
 
-            setTimeout(() => {
+            setTimeout(async () => {
 
                 if (cl.type === "Rob") {
                     model.findOneAndDelete({
