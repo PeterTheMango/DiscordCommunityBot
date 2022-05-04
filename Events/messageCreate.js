@@ -5,6 +5,7 @@ const {
 const Event = require(`../Structures/Event`);
 const db_instance = require(`../Handlers/Database`);
 const CooldownManager = require(`../Models/Cooldown`);
+const Emotes = require(`../Handlers/EmoteHandler`);
 
 module.exports = class extends Event {
 
