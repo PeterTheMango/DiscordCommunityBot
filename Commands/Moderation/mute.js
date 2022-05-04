@@ -11,6 +11,7 @@ const {
 	helperRole
 } = require(`../../Assets/Config.json`);
 const Command = require(`../../Structures/Command`);
+const Cooldowns = require(`../../Models/Cooldown`);
 
 module.exports = class extends Command {
 
