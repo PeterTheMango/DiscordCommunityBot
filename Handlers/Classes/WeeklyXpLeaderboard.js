@@ -4,11 +4,11 @@ const {
     Message,
     MessageEmbed
 } = require("discord.js");
-const DailyXP = require(`../../Models/DailyXP`);
 const Cooldown = require(`../../Structures/Cooldown`);
 const CooldownsRecords = require(`../../Models/Cooldown`);
 const Leaderboard = require(`../../Models/Leaderboard`);
 const format = require(`humanize-duration`);
+const WeeklyXP = require("../../Models/WeeklyXP");
 
 class WeeklyXpLeaderboard {
 
@@ -31,7 +31,7 @@ class WeeklyXpLeaderboard {
      */
     async reset() {
 
-        await DailyXP.deleteMany({}).catch(err => console.log(`Unable to drop Weekly XP collection. See Error Below!\n\n${err.toString()}`));
+        await WeeklyXP.deleteMany({}).catch(err => console.log(`Unable to drop Weekly XP collection. See Error Below!\n\n${err.toString()}`));
         let currentCooldown = await CooldownsRecords.find({
             discord_id: this.message.id,
             type: "weeklylb_reset"
@@ -42,7 +42,7 @@ class WeeklyXpLeaderboard {
                 type: "weeklylb_reset"
             });
         }
-        let dailyCooldown = new Cooldown(this.message.id, "dailylb_reset", Date.now() + 604800000);
+        let dailyCooldown = new Cooldown(this.message, "weeklylb_reset", Date.now() + 604800000);
         await dailyCooldown.save();
 
         setTimeout(async () => this.reset(), 604800000);
@@ -54,8 +54,11 @@ class WeeklyXpLeaderboard {
      * Updates the data found on the leaderboard
      */
     async update() {
-		
-        const {divider, setDivider} = require(`../EmbedHandler`);
+
+        const {
+            divider,
+            setDivider
+        } = require(`../EmbedHandler`);
         const {
             getWeeklyLeaders
         } = require(`../LevelHandler`);
@@ -79,7 +82,9 @@ class WeeklyXpLeaderboard {
                 iconURL: "https://cdn.discordapp.com/icons/727649662475173962/a_b0e71799d16f310bfde4182ee2ae96e6.gif",
                 text: "E-Girl Paradise | Updates every 5 minutes"
             },
-            image: {url: divider[await setDivider()]}
+            image: {
+                url: divider[await setDivider()]
+            }
         });
 
         let placementIcons = ["<:star1:955048718187499520>",
@@ -132,7 +137,7 @@ class WeeklyXpLeaderboard {
 
         await insert.save().catch(err => console.log(`Unable to save new Weekly Leaderboard. Error:\n${err.toString()}`));
 
-        let insertCooldown = new Cooldown(insert.message_id, "weeklylb_reset", Date.now() + 604800000);
+        let insertCooldown = new Cooldown(this.message, "weeklylb_reset", Date.now() + 604800000);
         await insertCooldown.save();
 
         setTimeout(async () => this.reset(), 604800000);

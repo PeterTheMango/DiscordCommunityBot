@@ -1,4 +1,7 @@
 let model = require(`../Models/Cooldown`);
+const {
+    getClient
+} = require("../Structures/Client");
 
 async function registerUserCooldowns() {
 
@@ -21,10 +24,41 @@ async function registerUserCooldowns() {
                     }).catch(err => console.log(err));
                 }
 
+                let {
+                    userVoiceBanLog
+                } = require(`../Handlers/Classes/ModerationLog`);
+                let {
+                    novcRole
+                } = require(`../Assets/Config.json`);
+
                 model.findOneAndDelete({
                     discord_id: cl.discord_id,
                     type: cl.type
                 }).catch(err => console.log(err));
+
+                if (cl.type === "novc") {
+                    let client = await getClient();
+                    let guild = await client.guilds.cache.get(`727649662475173962`);
+                    if (!guild) return;
+                    let member = await guild.members.cache.get(cl.discord_id);
+                    if (!member) return;
+                    let noVC = new userVoiceBanLog(member, null, null, 0, guild);
+                    await noVC.sendUserComplete();
+                    await member.roles.remove(novcRole).catch(err => `Unable to remove novc role from users. Missing perms/error?\n\n${err.toString()}`);
+                }
+
+                if (cl.type === "mute") {
+                    let client = await getClient();
+                    let guild = await client.guilds.cache.get(`727649662475173962`);
+                    if (!guild) return;
+                    let member = await guild.members.cache.get(cl.discord_id);
+                    if (!member) return;
+                    let noVC = new userVoiceBanLog(member, null, null, 0, guild);
+                    await noVC.sendUserComplete();
+                    await member.roles.remove(novcRole).catch(err => `Unable to remove mute role from users. Missing perms/error?\n\n${err.toString()}`);
+                }
+
+
             }, cl.end - Date.now())
         }
     })

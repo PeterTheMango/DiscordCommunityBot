@@ -42,6 +42,11 @@ async function init(Config) {
 
 }
 
+async function getClient() {
+    return client;
+}
+
 module.exports = {
-    init
+    init,
+    getClient
 }

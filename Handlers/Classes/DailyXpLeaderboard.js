@@ -42,7 +42,7 @@ class DailyXpLeaderboard {
                 type: "dailylb_reset"
             });
         }
-        let dailyCooldown = new Cooldown(this.message.id, "dailylb_reset", Date.now() + 86400000);
+        let dailyCooldown = new Cooldown(this.message, "dailylb_reset", Date.now() + 86400000);
         await dailyCooldown.save();
 
         setTimeout(async () => this.reset(), 86400000);
@@ -54,9 +54,12 @@ class DailyXpLeaderboard {
      * Updates the data found on the leaderboard
      */
     async update() {
-		
-        const {divider, setDivider} = require(`../EmbedHandler`);
-        
+
+        const {
+            divider,
+            setDivider
+        } = require(`../EmbedHandler`);
+
         const {
             getDailyLeaders
         } = require(`../LevelHandler`);
@@ -80,7 +83,9 @@ class DailyXpLeaderboard {
                 iconURL: "https://cdn.discordapp.com/icons/727649662475173962/a_b0e71799d16f310bfde4182ee2ae96e6.gif",
                 text: "E-Girl Paradise | Updates every 5 minutes"
             },
-            image: {url: divider[await setDivider()]}
+            image: {
+                url: divider[await setDivider()]
+            }
         });
 
         let placementIcons = ["<:star1:955048718187499520>",
@@ -133,7 +138,7 @@ class DailyXpLeaderboard {
 
         await insert.save().catch(err => console.log(`Unable to save new Daily Leaderboard. Error:\n${err.toString()}`));
 
-        let insertCooldown = new Cooldown(insert.message_id, "dailylb_reset", Date.now() + 86400000);
+        let insertCooldown = new Cooldown(this.message, "dailylb_reset", Date.now() + 86400000);
         await insertCooldown.save();
 
         setTimeout(async () => this.reset(), 86400000);

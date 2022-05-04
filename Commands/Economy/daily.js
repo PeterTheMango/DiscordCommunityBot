@@ -63,7 +63,7 @@ module.exports = class extends Command {
             embeds: [daily_embed]
         });
 
-        let dailyCooldown = new Cooldown(message.member.id, "Daily", Date.now() + Config.economy.daily_cooldown);
+        let dailyCooldown = new Cooldown(message.member, "Daily", Date.now() + Config.economy.daily_cooldown);
         await dailyCooldown.save();
 
 

@@ -29,10 +29,10 @@ module.exports = class extends Command {
 	}
 
 	/**
-     *
-     * @param {Message} message
-     * @param {string[]} args
-     */
+	 *
+	 * @param {Message} message
+	 * @param {string[]} args
+	 */
 	async execute(message, args) {
 		// Embeds
 		const cooldownEmbed = new MessageEmbed({
@@ -68,7 +68,7 @@ module.exports = class extends Command {
 			embeds: [workEmbed]
 		});
 
-		const workCooldown = new Cooldown(message.member.id, 'Work', Date.now() + Config.economy.work_cooldown);
+		const workCooldown = new Cooldown(message.member, 'Work', Date.now() + Config.economy.work_cooldown);
 		await workCooldown.save();
 	}
 
