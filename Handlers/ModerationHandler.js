@@ -132,7 +132,7 @@ async function muteUser(user, moderator, reason) {
 
     let offenseModel = require(`../Models/Offense`);
     let {
-        userVoiceBanLog
+        userMuteLog
     } = require(`./Classes/ModerationLog`);
     let offense = await offenseModel.find({
         discord_id: user.id,
