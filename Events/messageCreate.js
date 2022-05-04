@@ -56,7 +56,29 @@ module.exports = class extends Event {
         const [cmd, ...args] = message.content.slice(prefix.length).trim().split(/ +/g);
         const command = this.client.commands.get(cmd.toLowerCase()) || this.client.commands.get(this.client.aliases.get(cmd.toLowerCase()));
         if (command) {
-            command.execute(message, args, db);
+
+            let cooldown_embed = new MessageEmbed({
+                description: `${message.member} <a:egp_no:935209428070854717> Please wait %time_left% before running another command!`,
+                footer: {
+                    text: `You can use a command every 5 seconds.`,
+                    iconURL: Emotes.BELL
+                },
+                color: `RED`
+            });
+
+            let hasCommandCooldown = await CooldownManager.findOne({
+                discord_id: message.member.id,
+                type: "Command"
+            });
+
+            if (hasRobCooldown) return message.channel.send({
+                embeds: [cooldown_embed.setDescription(cooldown_embed.description.replace(`%time_left%`, `**${format_time(hasCommandCooldown.end - Date.now(), {round: true})}**`))]
+            });
+
+            await command.execute(message, args, db);
+
+            let commandCooldown = new CooldownManager(message.member.id, "Command", Date.now() + 5000);
+            await commandCooldown.save();
         }
 
     }
