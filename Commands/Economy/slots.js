@@ -106,8 +106,6 @@ module.exports = class extends Command {
                             .replace(`<a:slots3:869255958482780201>`, $$$)) + `\nResult: **Loser**\nYou lost ${amount} coins!`)
                     ]
                 });
-
-                console.log(amount)
             }, 3000);
         } else if ($ === $$ && $$ === $$$) {
             //win
@@ -128,9 +126,6 @@ module.exports = class extends Command {
 
                 await updateBalance(message.member.id, currentBalance.wallet + totalReturn, currentBalance.stored);
 
-                console.log(amount);
-                console.log(totalReturn);
-
             }, 3000);
         } else {
             //draw
@@ -147,7 +142,6 @@ module.exports = class extends Command {
 
                 await updateBalance(message.member.id, currentBalance.wallet + amount, currentBalance.stored);
 
-                console.log(amount)
             }, 3000);
         }
 
