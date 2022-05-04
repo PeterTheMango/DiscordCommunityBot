@@ -7,6 +7,7 @@ const db_instance = require(`../Handlers/Database`);
 const CooldownManager = require(`../Models/Cooldown`);
 const Cooldown = require(`../Structures/Cooldown`);
 const Emotes = require(`../Handlers/EmoteHandler`);
+const format_time = require(`humanize-duration`);
 
 module.exports = class extends Event {
 
