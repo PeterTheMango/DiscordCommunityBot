@@ -10,6 +10,7 @@ const {
 const {
     vcMod
 } = require(`../../Assets/Config.json`);
+const Cooldowns = require(`../../Models/Cooldown`);
 const Command = require(`../../Structures/Command`);
 
 module.exports = class extends Command {
@@ -39,6 +40,11 @@ module.exports = class extends Command {
         let missingArgsEmbed = new MessageEmbed({
             title: "Invalid Usage",
             description: `${message.member} <a:egp_no:935209428070854717> .novc \`user\` \`reason\``,
+            color: "RED"
+        });
+        let userAlreadyBannedEmbed = new MessageEmbed({
+            title: "Invalid Usage",
+            description: `${message.member} <a:egp_no:935209428070854717> This user is already voice-banned.`,
             color: "RED"
         });
         let invalidUserEmbed = new MessageEmbed({
@@ -87,7 +93,19 @@ module.exports = class extends Command {
             embeds: [noReasonEmbed]
         });
 
+        let isBanned = await Cooldowns.findOne({
+            discord_id: user.id,
+            type: `novc`
+        });
+
+        if (isBanned) return message.channel.send({
+            embeds: [userAlreadyBannedEmbed]
+        });
+
         let userVoiceBanned = await noVcUser(user, message.member, reason);
+        if (message.member.voice.channel) {
+            await message.member.voice.disconnect();
+        }
 
         if (!userVoiceBanned) return message.channel.send({
             embeds: [immuneUserEmbed]

@@ -60,6 +60,11 @@ module.exports = class extends Command {
 			description: `${message.member} <a:egp_no:935209428070854717> That user is cannot be muted!`,
 			title: 'User Immune'
 		});
+		let userAlreadyBannedEmbed = new MessageEmbed({
+			title: "Invalid Usage",
+			description: `${message.member} <a:egp_no:935209428070854717> This user is already muted.`,
+			color: "RED"
+		});
 
 		if (!message.member.roles.cache.has(helperRole)) return message.channel.send({
 			embeds: [noPermissionsEmbed]
@@ -85,6 +90,15 @@ module.exports = class extends Command {
 
 		if (reason === '') return message.channel.send({
 			embeds: [noReasonEmbed]
+		});
+
+		let isMuted = await Cooldowns.findOne({
+			discord_id: user.id,
+			type: `mute`
+		});
+
+		if (isMuted) return message.channel.send({
+			embeds: [userAlreadyMutedEmbed]
 		});
 
 		let userMuted = await muteUser(user, message.member, reason);
