@@ -5,6 +5,7 @@ const {
 const Event = require(`../Structures/Event`);
 const db_instance = require(`../Handlers/Database`);
 const CooldownManager = require(`../Models/Cooldown`);
+const Cooldown = require(`../Structures/Cooldown`);
 const Emotes = require(`../Handlers/EmoteHandler`);
 
 module.exports = class extends Event {
@@ -79,7 +80,7 @@ module.exports = class extends Event {
 
             await command.execute(message, args, db);
 
-            let commandCooldown = new CooldownManager(message.member.id, "Command", Date.now() + 5000);
+            let commandCooldown = new Cooldown(message.member.id, "Command", Date.now() + 5000);
             await commandCooldown.save();
         }
 
