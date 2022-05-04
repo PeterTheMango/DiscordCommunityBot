@@ -1,5 +1,6 @@
 const {
-    Message
+    Message,
+    MessageEmbed
 } = require("discord.js");
 const Event = require(`../Structures/Event`);
 const db_instance = require(`../Handlers/Database`);
