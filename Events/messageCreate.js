@@ -47,7 +47,7 @@ module.exports = class extends Event {
             }
         }
 
-        if (![`192715014602358784`, `376308669576511500`].includes(message.author.id)) return;
+        // if (![`192715014602358784`, `376308669576511500`].includes(message.author.id)) return;
 
         let db = await db_instance.getDatabase();
 
@@ -79,7 +79,7 @@ module.exports = class extends Event {
                 embeds: [cooldown_embed.setDescription(cooldown_embed.description.replace(`%time_left%`, `**${format_time(hasCommandCooldown.end - Date.now(), {round: true})}**`))]
             });
 
-            let commandCooldown = new Cooldown(message.member.id, "Command", Date.now() + 10000);
+            let commandCooldown = new Cooldown(message.member.id, "Command", Date.now() + 5000);
             await commandCooldown.save();
 
             await command.execute(message, args, db);
