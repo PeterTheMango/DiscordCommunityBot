@@ -71,14 +71,14 @@ class Cooldown {
 
                 if (this.type === "novc") {
                     let noVC = new userVoiceBanLog(this.member, null, null, 0, this.member.guild);
-                    await noVC.sendUserComplete();
-                    await this.member.roles.remove(novcRole).catch(err => `Unable to remove novc role from users. Missing perms/error?\n\n${err.toString()}`);
+                    noVC.sendUserComplete();
+                    this.member.roles.remove(novcRole).catch(err => `Unable to remove novc role from users. Missing perms/error?\n\n${err.toString()}`);
                 }
 
                 if (this.type === "mute") {
                     let mute = new userMuteLog(this.member, null, null, 0, this.member.guild);
-                    await mute.sendUserComplete();
-                    await this.member.roles.remove(moderation.mute_role).catch(err => `Unable to remove mute role from users. Missing perms/error?\n\n${err.toString()}`);
+                    mute.sendUserComplete();
+                    this.member.roles.remove(moderation.mute_role).catch(err => `Unable to remove mute role from users. Missing perms/error?\n\n${err.toString()}`);
                 }
 
             }, this.end - Date.now());
