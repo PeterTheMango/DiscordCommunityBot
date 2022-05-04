@@ -74,17 +74,15 @@ module.exports = class extends Event {
                 type: "Command"
             });
 
-            console.log(hasRobCooldown);
-
-            if (hasRobCooldown) return message.channel.send({
+            if (hasCommandCooldown) return message.channel.send({
                 embeds: [cooldown_embed.setDescription(cooldown_embed.description.replace(`%time_left%`, `**${format_time(hasCommandCooldown.end - Date.now(), {round: true})}**`))]
             });
 
             let commandCooldown = new Cooldown(message.member.id, "Command", Date.now() + 10000);
-            await commandCooldown.save()
-                .then(async () => {
-                    await command.execute(message, args, db);
-                });
+            await commandCooldown.save();
+
+            await command.execute(message, args, db);
+
 
         }
 
