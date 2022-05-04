@@ -48,6 +48,11 @@ module.exports = class extends Command {
                     inline: true
                 },
                 {
+                    name: `🎀 Fun 🎀`,
+                    value: ".hug .kiss .love .lick .hate .slap .bark .meow .spit .uwu",
+                    inline: true
+                },
+                {
                     name: `👥 Gangs [WIP]`,
                     value: `.create .info .promote .demote .disband .kick .leave`,
                     inline: true

@@ -1,4 +1,4 @@
-/.DS_Store
+.DS_Store
 node_modules/*
 
 # Logs
@@ -131,3 +131,4 @@ dist
 .yarn/build-state.yml
 .yarn/install-state.gz
 .pnp.*
+Commands/.DS_Store
