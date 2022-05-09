@@ -30,7 +30,7 @@ module.exports = class extends Command {
             title: ':x: Insufficient Permissions! :x:'
         });
 
-        console.log(this.permissions)
+        await console.log(this.permissions)
 
         if (!member.roles.cache.some(rl => this.permissions.includes(rl.id))) return message.reply({
             embeds: [noPermissionsEmbed]
