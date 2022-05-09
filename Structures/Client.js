@@ -60,7 +60,7 @@ async function getClient() {
  */
 async function logError(err) {
 
-    return fs.createWriteStream(`./Logs/latest.log`).write(err);
+    return fs.createWriteStream(`./Logs/latest.log`).write(err.toString());
 
 }
 
