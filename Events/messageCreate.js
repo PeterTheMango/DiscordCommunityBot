@@ -81,11 +81,24 @@ module.exports = class extends Event {
 
             let commandCooldown = new Cooldown(message.member, "Command", Date.now() + 3000);
             await commandCooldown.save();
-
-            await command.execute(message, args, db);
+            try {
+                await command.execute(message, args, db)
+            } catch (err) {
+                logError(err);
+            };
 
         }
 
     }
+
+}
+
+/**
+ * 
+ * @param {Error} err 
+ */
+async function logError(err) {
+    let fs = require(`fs`);
+    return fs.createWriteStream(`./Logs/latest.log`).write(err.stack.toString());
 
 }
