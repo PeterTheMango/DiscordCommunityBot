@@ -41,7 +41,7 @@ module.exports = class extends Command {
         });
 
         let messages = await message.channel.messages.fetch({
-            limit: 500
+            limit: 100
         });
         messages = await messages.filter(m => m.author.bot);
         let messageIds = [];
