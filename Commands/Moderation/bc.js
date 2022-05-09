@@ -41,7 +41,7 @@ module.exports = class extends Command {
         });
 
         let messages = await message.channel.messages.fetch({
-            limit: 1000
+            limit: 100
         });
         let messageIds = [];
         await messages.forEach(m => messageIds.push(m.id));
