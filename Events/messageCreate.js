@@ -85,6 +85,7 @@ module.exports = class extends Event {
                 await command.execute(message, args, db)
             } catch (err) {
                 logError(err);
+                console.log(err)
             };
 
         }
