@@ -26,10 +26,10 @@ module.exports = class extends Command {
 	}
 
 	/**
-     *
-     * @param {Message} message
-     * @param {string[]} args
-     */
+	 *
+	 * @param {Message} message
+	 * @param {string[]} args
+	 */
 	async execute(message, args) {
 		const balanceEmbed = new MessageEmbed({
 			color: 'RANDOM',
@@ -58,11 +58,7 @@ module.exports = class extends Command {
 		const userBalance = await getBalance(user.id);
 
 		message.channel.send({
-			embeds: [balanceEmbed.setDescription(balanceEmbed.description
-				.replace(`{user}`, `${user}`)
-				.replace(`{wallet}`, `${userBalance.wallet}`)
-				.replace(`{stored}`, `${userBalance.stored}`)
-			)]
+
 		});
 	}
 

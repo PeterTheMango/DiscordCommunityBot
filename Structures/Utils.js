@@ -10,21 +10,22 @@ const {
 const glob = promisify(require('glob'));
 const Command = require('./Command.js');
 const Event = require('./Event.js');
+const fs = require(`fs`);
 
 module.exports = class Util {
 
 	/**
-     * Utility Constructor
-     * @param {Client} client
-     */
+	 * Utility Constructor
+	 * @param {Client} client
+	 */
 	constructor(client) {
 		this.client = client;
 	}
 
 	isClass(input) {
 		return typeof input === 'function' &&
-            typeof input.prototype === 'object' &&
-            input.toString().substring(0, 5) === 'class';
+			typeof input.prototype === 'object' &&
+			input.toString().substring(0, 5) === 'class';
 	}
 
 	get directory() {
