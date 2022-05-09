@@ -2,7 +2,9 @@ const {
     Guild,
     TextChannel,
     Message,
-    MessageEmbed
+    MessageEmbed,
+    MessageButton,
+    MessageActionRow
 } = require("discord.js");
 const Leaderboard = require(`../../Models/Leaderboard`);
 
@@ -34,6 +36,18 @@ class AllTimeLevelLeaderboard {
         } = require(`../LevelHandler`);
 
         this.leaders = await getLevelLeaders();
+        
+        let xpButton = new MessageButton({
+            label: `Earn XP`,
+            customID: `joinChannelButton`,
+            style: `LINK`,
+            emoji: `964501179247759400`,
+            url: `https://discord.gg/GUyMtqprCg`
+        });
+        
+        let buttonRow = new MessageActionRow({
+            components: [xpButton]
+        });
 
         let leaderboardEmbed = new MessageEmbed({
             title: "Level Leaderboard",
@@ -71,7 +85,8 @@ class AllTimeLevelLeaderboard {
         topTenMembers += `\n<a:egpruby:852965552674832384> **Gain XP by becoming active in our** [VCs](https://discord.gg/c88dUg5bDk)`
 
         await this.message.edit({
-            embeds: [leaderboardEmbed.setDescription(topTenMembers)]
+            embeds: [leaderboardEmbed.setDescription(topTenMembers)],
+            components: [buttonRow]
         });
 
     }

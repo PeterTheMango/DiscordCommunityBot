@@ -58,10 +58,10 @@ module.exports = class extends Command {
 		});
 		let immuneUserEmbed = new MessageEmbed({
 			color: 'RED',
-			description: `${message.member} <a:egp_no:935209428070854717> That user is cannot be muted!`,
+			description: `${message.member} <a:egp_no:935209428070854717> That user cannot be muted!`,
 			title: 'User Immune'
 		});
-		let userAlreadyBannedEmbed = new MessageEmbed({
+		let userAlreadyMutedEmbed = new MessageEmbed({
 			title: "Invalid Usage",
 			description: `${message.member} <a:egp_no:935209428070854717> This user is already muted.`,
 			color: "RED"
@@ -103,6 +103,13 @@ module.exports = class extends Command {
 		});
 
 		let userMuted = await muteUser(user, message.member, reason);
+        
+        let msgs = await message.channel.messages.fetch({filter: 100});
+        let userMessages = await msgs.filter(m => m.author.id === user.id);
+        let msgsIds = [];
+        await userMessages.forEach(m => msgsIds.push(m.id));
+        
+        await message.channel.bulkDelete(msgsIds, true)
 
 		if (!userMuted) return message.channel.send({
 			embeds: [immuneUserEmbed]

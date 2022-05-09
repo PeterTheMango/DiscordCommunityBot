@@ -52,7 +52,8 @@ async function getWeeklyLeaders() {
  */
 async function getLeaders() {
     let results = await Level.find({}).sort({
-        xp: -1
+        xp: -1,
+        level: -1
     }).limit(10).lean();
     return results;
 }
@@ -73,12 +74,24 @@ async function getLevelLeaders() {
  * @returns {String[]} All the level data regarding a user.
  */
 async function getUserLevel(member) {
-    let results = await Level.findOne({
+    let results;
+    
+    let query = await Level.findOne({discord_id: member.id});
+    
+    if(!query) {
+        results = await Level.findOneAndUpdate({
         discord_id: member.id
+    }, {
+        discord_id: member.id,
+        xp: 0,
+        level: 1,
+        time: 0
+    }, {
+        upsert: true,
+        new: true
     });
-
-    if (!results) {
-        results = null;
+    } else {
+        results = query
     }
 
     return results;

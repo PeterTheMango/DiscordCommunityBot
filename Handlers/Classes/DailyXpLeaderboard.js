@@ -2,7 +2,9 @@ const {
     Guild,
     TextChannel,
     Message,
-    MessageEmbed
+    MessageEmbed,
+    MessageButton,
+    MessageActionRow
 } = require("discord.js");
 const DailyXP = require(`../../Models/DailyXP`);
 const Cooldown = require(`../../Structures/Cooldown`);
@@ -72,6 +74,18 @@ class DailyXpLeaderboard {
         if (!this.cooldown) this.cooldown = Date.now() + 300000
 
         this.leaders = await getDailyLeaders();
+        
+        let xpButton = new MessageButton({
+            label: `Earn XP`,
+            customID: `joinChannelButton`,
+            style: `LINK`,
+            emoji: `964501179247759400`,
+            url: `https://discord.gg/GUyMtqprCg`
+        });
+        
+        let buttonRow = new MessageActionRow({
+            components: [xpButton]
+        });
 
         let leaderboardEmbed = new MessageEmbed({
             title: "Daily Leaderboard",
@@ -108,10 +122,11 @@ class DailyXpLeaderboard {
 
         }
 
-        topTenMembers += `\n\n<a:egpruby:852965552674832384> **Gain XP by becoming active in our** [VCs](https://discord.gg/c88dUg5bDk)\n<a:egpruby:852965552674832384> **Gain VC Points by becoming active in our** [VCs](https://discord.gg/c88dUg5bDk)\n\n<:resetegp:935233396706271342> Resets in **${format(this.cooldown.end - Date.now(), {round: true})}**`
+        topTenMembers += `\n\n<a:egpruby:852965552674832384> **Gain XP by becoming active in our** [VCs](https://discord.gg/c88dUg5bDk)\n<a:egpruby:852965552674832384> **Gain VC Points by becoming active in our** [VCs](https://discord.gg/c88dUg5bDk)\n\n<a:resetegp:763157953241940049> Resets in **${format(this.cooldown.end - Date.now(), {round: true})}**`
 
         await this.message.edit({
-            embeds: [leaderboardEmbed.setDescription(topTenMembers)]
+            embeds: [leaderboardEmbed.setDescription(topTenMembers)],
+            components: [buttonRow]
         });
 
     }

@@ -25,10 +25,12 @@ async function registerUserCooldowns() {
                 }
 
                 let {
-                    userVoiceBanLog
+                    userVoiceBanLog,
+                    userMuteLog
                 } = require(`../Handlers/Classes/ModerationLog`);
                 let {
-                    novcRole
+                    novcRole,
+                    moderation
                 } = require(`../Assets/Config.json`);
 
                 model.findOneAndDelete({
@@ -44,7 +46,7 @@ async function registerUserCooldowns() {
                     if (!member) return;
                     let noVC = new userVoiceBanLog(member, null, null, 0, guild);
                     await noVC.sendUserComplete();
-                    await member.roles.remove(novcRole).catch(err => `Unable to remove novc role from users. Missing perms/error?\n\n${err.toString()}`);
+                    await member.roles.remove(novcRole).catch(err => `Unable to remove novc role from users. Missing perms/error?\n\n` + err);
                 }
 
                 if (cl.type === "mute") {
@@ -53,9 +55,9 @@ async function registerUserCooldowns() {
                     if (!guild) return;
                     let member = await guild.members.cache.get(cl.discord_id);
                     if (!member) return;
-                    let noVC = new userVoiceBanLog(member, null, null, 0, guild);
+                    let muted = new userMutenLog(member, null, null, 0, guild);
                     await noVC.sendUserComplete();
-                    await member.roles.remove(novcRole).catch(err => `Unable to remove mute role from users. Missing perms/error?\n\n${err.toString()}`);
+                    await member.roles.remove(moderation.mute_role).catch(err => `Unable to remove mute role from users. Missing perms/error?\n\n$` + err);
                 }
 
 

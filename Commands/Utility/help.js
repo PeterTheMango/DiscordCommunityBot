@@ -39,7 +39,7 @@ module.exports = class extends Command {
             },
             fields: [{
                     name: `💰 Economy 💰`,
-                    value: ".bet .bal .work .daily .steal .pick .give .slots .store .take .claim .steal",
+                    value: ".bet .bal .work .daily .steal .pick .give .slots .store .take .claim",
                     inline: true
                 },
                 {
@@ -48,8 +48,8 @@ module.exports = class extends Command {
                     inline: true
                 },
                 {
-                    name: `🎀 Fun 🎀`,
-                    value: ".hug .kiss .love .lick .hate .slap .bark .meow .spit .uwu",
+                    name: `🌟 Fun 🌟`,
+                    value: ".hug .kiss .love .hate .slap .bark .spit .simp .uwu",
                     inline: true
                 },
                 {

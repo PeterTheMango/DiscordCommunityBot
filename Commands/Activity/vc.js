@@ -28,14 +28,14 @@ module.exports = class extends Command {
         let embed = new MessageEmbed({
             color: "#ff00c8",
             title: "Voice Channel Activity",
-            description: `${message.member} You have spent time this week in VCs!`
+            description: `${message.member} <:vcbut:964501179247759400> You have spent **time** this week in [VCs](https://discord.gg/c88dUg5bDk)`
         });
 
         let wXP = await weeklyXP.getWeeklyXP(message.member);
 
         if (!wXP) {
             return message.channel.send({
-                embeds: [embed.setDescription(`NO DATA FOUND`)]
+                embeds: [embed.setDescription(`**NO DATA!** Join a [VC](https://discord.gg/c88dUg5bDk) to register a data.`)]
             });
         }
 

@@ -104,7 +104,7 @@ module.exports = class extends Command {
 
         let userVoiceBanned = await noVcUser(user, message.member, reason);
         if (user.voice.channel) {
-            await user.voice.disconnect();
+            await user.voice.disconnect().catch(err => console.log(`Unable to disconnect user from channel. Missing Permission.` + err));
         }
 
         if (!userVoiceBanned) return message.channel.send({

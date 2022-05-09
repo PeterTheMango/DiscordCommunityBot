@@ -15,7 +15,7 @@ module.exports = class extends Command {
             name: "slots",
             aliases: ["gamble"],
             category: "Economy",
-            description: "Gambles coins through a slot machine.",
+            description: "Gambles credits through a slot machine.",
             usage: "<amount>"
         })
     }
@@ -66,8 +66,9 @@ module.exports = class extends Command {
         if (amount > currentBalance.wallet || amount < 1) return message.channel.send({
             embeds: [notEnough_embed]
         });
-
-        await updateBalance(message.member.id, currentBalance.wallet - amount, currentBalance.stored);
+		
+        let amountTaken = currentBalance.wallet - amount;
+        await updateBalance(message.member.id, amountTaken, currentBalance.stored);
 
         let embed1 = slotsEmbed;
         let part1 = await message.channel.send({
@@ -88,7 +89,7 @@ module.exports = class extends Command {
 
         let winningChance = await this.generatePercentage(1, 100);
 
-        if (winningChance >= 70) {
+        if (winningChance >= 60) {
             $ = items[Math.floor(items.length * Math.random())];
             $$ = $;
             $$$ = $$;
@@ -103,7 +104,7 @@ module.exports = class extends Command {
                         .setDescription((slotsEmbed.description
                             .replace(`<a:slots1:869255958847696966>`, $)
                             .replace(`<a:slots2:869255958608637982>`, $$)
-                            .replace(`<a:slots3:869255958482780201>`, $$$)) + `\nResult: **Loser**\nYou lost ${amount} coins!`)
+                            .replace(`<a:slots3:869255958482780201>`, $$$)) + `\nResult: **Loser**\nYou lost ${amount} credits!`)
                     ]
                 });
             }, 3000);
@@ -114,13 +115,14 @@ module.exports = class extends Command {
                 let returnPercentage = await this.generatePercentage(110, 120);
                 let totalReturn = Math.ceil((returnPercentage / 100) * amount);
 
+
                 await part1.edit({
                     embeds: [
                         embed2.setColor(`GREEN`)
                         .setDescription((slotsEmbed.description
                             .replace(`<a:slots1:869255958847696966>`, $)
                             .replace(`<a:slots2:869255958608637982>`, $$)
-                            .replace(`<a:slots3:869255958482780201>`, $$$)) + `\nResult: **Winner**\nYou gained ${totalReturn} coins!`)
+                            .replace(`<a:slots3:869255958482780201>`, $$$)) + `\nResult: **Winner**\nYou gained ${totalReturn} credits!`)
                     ]
                 });
 
@@ -136,11 +138,10 @@ module.exports = class extends Command {
                         .setDescription((slotsEmbed.description
                             .replace(`<a:slots1:869255958847696966>`, $)
                             .replace(`<a:slots2:869255958608637982>`, $$)
-                            .replace(`<a:slots3:869255958482780201>`, $$$)) + `\nResult: **Draw**\nYou didn't lose any coins!`)
+                            .replace(`<a:slots3:869255958482780201>`, $$$)) + `\nResult: **Draw**\nYou didn't lose any credits!`)
                     ]
                 });
-
-                await updateBalance(message.member.id, currentBalance.wallet + amount, currentBalance.stored);
+                await updateBalance(message.member.id, amountTaken+amount, currentBalance.stored);
 
             }, 3000);
         }

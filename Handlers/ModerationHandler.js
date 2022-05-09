@@ -107,7 +107,7 @@ async function noVcUser(user, moderator, reason) {
         await Log.sendLog();
         await Log.sendUserLog();
 
-        let vcCooldown = new Cooldown(user.id, "novc", Date.now() + 1800000);
+        let vcCooldown = new Cooldown(user, "novc", Date.now() + 1800000);
         await vcCooldown.save();
         return true;
     }
@@ -172,7 +172,7 @@ async function muteUser(user, moderator, reason) {
         await Log.sendLog();
         await Log.sendUserLog();
 
-        let muteCooldown = new Cooldown(user.id, "mute", Date.now() + 300000);
+        let muteCooldown = new Cooldown(user, "mute", Date.now() + 300000);
         await muteCooldown.save();
         return true;
     }

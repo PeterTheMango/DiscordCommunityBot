@@ -53,6 +53,7 @@ class Cooldown {
                         discord_id: this.member.id,
                         type: "RobMsg"
                     }).catch(err => console.log(err));
+
                 }
 
                 model.findOneAndDelete({
@@ -72,13 +73,13 @@ class Cooldown {
                 if (this.type === "novc") {
                     let noVC = new userVoiceBanLog(this.member, null, null, 0, this.member.guild);
                     noVC.sendUserComplete();
-                    this.member.roles.remove(novcRole).catch(err => `Unable to remove novc role from users. Missing perms/error?\n\n${err.toString()}`);
+                    this.member.roles.remove(novcRole).catch(err => `Unable to remove novc role from users. Missing perms/error?\n\n` + err);
                 }
 
                 if (this.type === "mute") {
                     let mute = new userMuteLog(this.member, null, null, 0, this.member.guild);
                     mute.sendUserComplete();
-                    this.member.roles.remove(moderation.mute_role).catch(err => `Unable to remove mute role from users. Missing perms/error?\n\n${err.toString()}`);
+                    this.member.roles.remove(moderation.mute_role).catch(err => `Unable to remove mute role from users. Missing perms/error?\n\n` + err);
                 }
 
             }, this.end - Date.now());

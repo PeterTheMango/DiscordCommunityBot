@@ -118,7 +118,7 @@ class NoVCLog {
             },
             timestamp: Date.now()
         });
-        await logEmbed.setThumbnail(`https://i.imgur.com/lbeYJIZ.png`)
+        await logEmbed.setThumbnail(`https://i.imgur.com/9wzOzCt.png`)
 
         let logsChannel = this.guild.channels.cache.get(channels.bot_logs);
 
@@ -224,7 +224,7 @@ class muteLog {
             },
             timestamp: Date.now()
         });
-        await logEmbed.setThumbnail(`https://i.imgur.com/a49neJs.png`)
+        await logEmbed.setThumbnail(`https://i.imgur.com/HGx9cua.png`)
 
         let logsChannel = this.guild.channels.cache.get(channels.bot_logs);
 
@@ -245,7 +245,7 @@ class muteLog {
 
         let userEmbed = new MessageEmbed({
             color: "#CAD6FE",
-            title: "Voice Banned",
+            title: "Muted",
             footer: {
                 iconURL: "https://cdn.discordapp.com/emojis/935418232431583272.webp",
                 text: "Duration: 5 minutes"

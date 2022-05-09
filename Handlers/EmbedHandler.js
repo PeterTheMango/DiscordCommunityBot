@@ -2,7 +2,7 @@ const {
     MessageEmbed
 } = require("discord.js");
 const Emotes = require(`../Handlers/EmoteHandler`);
-const divider = [`https://i.imgur.com/FdEPAdP.gif`, `https://media.discordapp.net/attachments/859883140423614474/859883158493593600/dividerrr.gif`];
+const divider = [`https://cdn.discordapp.com/attachments/935532370860322827/972560266032193586/second_divider.gif`, `https://media.discordapp.net/attachments/859883140423614474/859883158493593600/dividerrr.gif`];
 let dividerIndex = 0;
 
 const WELCOME = new MessageEmbed({
@@ -18,7 +18,7 @@ const WELCOME = new MessageEmbed({
 
 const NEW_USER_CHANNEL = new MessageEmbed({
     title: 'Welcome to E-Girl Paradise!',
-    description: `<a:shinystar:811665342023073882> **Come chat in** <#790439605655699456>, <#790439743397560361>, <#790440385289388083>, <#861749492734885918>\n\n <a:neonheart:818739696301113354> **Grab some** <#936475008493039676>\n\n<a:animblueheartcrop:819106408833351701> [Come join us in VC!](https://discord.gg/c88dUg5bDk) <a:animblueheartcrop:819106408833351701>`,
+    description: `<a:shinystar:811665342023073882> Come chat in <#790439605655699456>, <#790439743397560361>, <#790440385289388083>, <#861749492734885918>\n\n<a:animblueheartcrop:819106408833351701> [Come join us in VC!](https://discord.gg/c88dUg5bDk)`,
     thumbnail: "https://cdn.discordapp.com/emojis/859882092334153758.gif",
     footer: {
         iconURL: Emotes.CHAT_HEART,

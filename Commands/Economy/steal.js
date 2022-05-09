@@ -163,9 +163,9 @@ module.exports = class extends Command {
             });
         }
 
-        let cooldown = new Cooldown(message.member.id, "Rob", Date.now() + 900000);
+        let cooldown = new Cooldown(message.member, "Rob", Date.now() + 900000);
         await cooldown.save();
-        let cooldown2 = new Cooldown(message.member.id, "RobMsg", 200);
+        let cooldown2 = new Cooldown(message.member, "RobMsg", 200);
         await cooldown2.save();
 
     }

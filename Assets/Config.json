@@ -1,8 +1,8 @@
 {
     "token": "NzQyNTEwMTE4Mjg1MDgyNzE2.XzHKbw.rcdOEP54Z7EYc6TmWwRPNkP1-WI",
     "novcRole": "767533847990239282",
-    "helperRole": "750950886666403875",
-    "vcMod": "750950886666403875",
+    "helperRole": "730459275499012127",
+    "vcMod": "730459276337741964",
     "database": {
         "username": "nyaa",
         "password": "WTHaBwGVtr2UZ",
@@ -16,18 +16,18 @@
         "chatting_channels": []
     },
     "economy": {
-        "daily_reward": 1000,
+        "daily_reward": 2500,
         "daily_cooldown": 86400000,
-        "work_reward": 250,
+        "work_reward": 300,
         "work_cooldown": 900000,
         "bet": {
-            "fail_rate": 53,
+            "fail_rate": 60,
             "max_return": 110,
             "mininum_bet": 50
         }
     },
     "moderation": {
-        "mute_role": "951952188752687135",
-        "novc_role": "951960547019071529"
+        "mute_role": "774930425780633651",
+        "novc_role": "767533847990239282"
     }
 }
