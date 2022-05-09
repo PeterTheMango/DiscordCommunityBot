@@ -9,6 +9,7 @@ const {
 const Config = require(`../Assets/Config.json`);
 const Util = require("./Utils");
 const Database = require(`../Handlers/Database`);
+const fs = require(`fs`);
 
 /*
     Client Specific Configuration
@@ -53,13 +54,11 @@ async function getClient() {
 
 /**
  * 
- * @param {Error} err 
+ * @param {String} err 
  */
 async function logError(err) {
 
-    let saveLog = await fs.writeFile(`${__dirname}/Logs/latest.log`, err, {}, (error) => {
-        if (err) return console.log(`ERROR OCCURED LOGGING CRASH!` + error.stack)
-    });
+    return fs.createWriteStream(`./Logs/latest.log`).write(err);
 
 }
 
