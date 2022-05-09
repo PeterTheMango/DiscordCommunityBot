@@ -30,11 +30,27 @@ module.exports = class extends Command {
             title: ':x: Insufficient Permissions! :x:'
         });
 
+        let clearedEmbed = new MessageEmbed({
+            color: '#BECCFE',
+            description: `${message.member} <:cleanegp:935247774545477704> Cleared **{x}** bots in {channel}!`,
+            title: 'Bot Command Clear'
+        });
+
         if (!message.member.roles.cache.some(rl => this.permissions.includes(rl.id))) return message.reply({
             embeds: [noPermissionsEmbed]
         });
 
+        let messages = await message.channel.messages.fetch({
+            limit: 1000
+        });
+        let messageIds = [];
+        await messages.forEach(m => messageIds.push(m.id));
 
+        await message.channel.bulkDelete(messageIds, true);
+
+        await message.channel.send({
+            embeds: [clearedEmbed.setDescription(clearedEmbed.description.replace(`{x}`, messageIds.length).replace(`{channel}`, `${message.channel}`))]
+        });
 
     }
 
