@@ -34,8 +34,8 @@ module.exports = class extends Command {
 
         let clearedEmbed = new MessageEmbed({
             color: '#BECCFE',
-            description: `${message.member} <:cleanegp:935247774545477704> Cleared **{x}** bots in {channel}!`,
-            title: 'Bot Command Clear'
+            description: `${message.member} <:cleanegp:935247774545477704> Cleared **{x}** images in {channel}!`,
+            title: 'Image Clear'
         });
 
         if (!message.member.roles.cache.some(rl => this.permissions.includes(rl.id))) return message.reply({
@@ -45,7 +45,7 @@ module.exports = class extends Command {
         let messages = await message.channel.messages.fetch({
             limit: 100
         });
-        messages = await messages.filter(m => m.author.bot);
+        messages = await messages.filter(m => m.attachments.size > 1 || m.embeds.length > 1);
         let messageIds = [];
         await messages.forEach(m => messageIds.push(m.id));
 
