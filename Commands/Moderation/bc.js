@@ -13,7 +13,7 @@ module.exports = class extends Command {
             category: "moderation",
             description: "Clears messages sent by bots.",
             usage: "",
-            permissions: []
+            permissions: [`889999630702632970`]
         });
     }
 
@@ -29,8 +29,6 @@ module.exports = class extends Command {
             description: `${message.member} <a:egp_no:935209428070854717> You can not use this command!`,
             title: ':x: Insufficient Permissions! :x:'
         });
-
-        await console.log(this.permissions)
 
         if (!message.member.roles.cache.some(rl => this.permissions.includes(rl.id))) return message.reply({
             embeds: [noPermissionsEmbed]
