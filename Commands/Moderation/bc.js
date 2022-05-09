@@ -1,5 +1,6 @@
 const {
-    Message
+    Message,
+    MessageEmbed
 } = require("discord.js");
 const Command = require(`../../Structures/Command`);
 
