@@ -16,6 +16,7 @@ module.exports = class Command {
         this.category = options.category || "Uncategorized";
         this.usage = options.usage || "No Usage Provided!";
         this.aliases = options.aliases || [];
+        this.permissions = options.permissions || [];
     };
 
     async execute(message, args) {
