@@ -8,10 +8,10 @@ module.exports = class extends Command {
 
     constructor(...args) {
         super(...args, {
-            name: "bc",
-            aliases: ["botclear"],
+            name: "ic",
+            aliases: ["imageclear"],
             category: "moderation",
-            description: "Clears messages sent by bots.",
+            description: "Clears messages with images.",
             usage: "",
             permissions: [`889999630702632970`]
         });
@@ -45,7 +45,7 @@ module.exports = class extends Command {
         let messages = await message.channel.messages.fetch({
             limit: 100
         });
-        messages = await messages.filter(m => m.attachments.size > 1 || m.embeds.length > 1);
+        messages = await messages.filter(m => m.attachments.size > 1);
         let messageIds = [];
         await messages.forEach(m => messageIds.push(m.id));
 
