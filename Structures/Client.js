@@ -56,11 +56,11 @@ async function getClient() {
 
 /**
  * 
- * @param {String} err 
+ * @param {Error} err 
  */
 async function logError(err) {
 
-    return fs.createWriteStream(`./Logs/latest.log`).write(err.toString());
+    return fs.createWriteStream(`./Logs/latest.log`).write(err.stack.toString());
 
 }
 
