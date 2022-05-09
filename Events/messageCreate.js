@@ -16,9 +16,9 @@ module.exports = class extends Event {
      * @param {Message} message 
      */
     async emit(message) {
-        
+
         if (message.author.bot || (message.channel.type === "DM" && !message.content.toLowerCase().includes(`dm`))) return;
-        
+
         let hasRobCooldown = await CooldownManager.findOne({
             discord_id: message.member.id,
             type: "RobMsg"
@@ -49,7 +49,7 @@ module.exports = class extends Event {
             }
         }
 
-       //  if (![`192715014602358784`, `376308669576511500`].includes(message.author.id)) return;
+        //  if (![`192715014602358784`, `376308669576511500`].includes(message.author.id)) return;
 
         let db = await db_instance.getDatabase();
 
@@ -76,17 +76,34 @@ module.exports = class extends Event {
             });
 
             if (hasCommandCooldown) return message.channel.send({
-                embeds: [cooldown_embed.setDescription(cooldown_embed.description.replace(`%time_left%`, `**${format_time(hasCommandCooldown.end - Date.now(), {round: true})}**`))]
+                embeds: [cooldown_embed.setDescription(cooldown_embed.description.replace(`%time_left%`, `**${format_time(hasCommandCooldown.end - Date.now(), { round: true })}**`))]
             });
 
             let commandCooldown = new Cooldown(message.member, "Command", Date.now() + 3000);
             await commandCooldown.save();
 
-            await command.execute(message, args, db);
+            try {
+                await command.execute(message, args, db);
+            } catch (err) {
+                console.log(`Error while running ${command.name}! Please check logs to see the errors!`)
+                await logError(err);
+            }
 
 
         }
 
     }
+
+}
+
+/**
+ * 
+ * @param {Error} err 
+ */
+let logError = async function (err) {
+
+    let saveLog = await fs.writeFile(`${__dirname}/Logs/latest.log`, err.stack, {}, (error) => {
+        if (err) return console.log(`ERROR OCCURED LOGGING CRASH!` + error.stack)
+    });
 
 }
