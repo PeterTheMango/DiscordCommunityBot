@@ -43,6 +43,7 @@ async function init(Config) {
 
     process.on(`unhandledRejection`, async code => {
         await console.log(`Bot Crashed! Please refer to logs for more info!`);
+        console.log(code)
         await logError(code);
         await process.exit(404)
     });
