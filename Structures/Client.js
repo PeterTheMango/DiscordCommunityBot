@@ -40,14 +40,27 @@ async function init(Config) {
     await client.utils.loadCommands();
     await client.login(Config.token);
 
-    process.on(`unhandledRejection`, code => {
-        console.error(`crashed!`, code);
+    process.on(`unhandledRejection`, async code => {
+        await console.log(`Bot Crashed! Please refer to logs for more info!`);
+        await logError(code)
     });
 
 }
 
 async function getClient() {
     return client;
+}
+
+/**
+ * 
+ * @param {Error} err 
+ */
+async function logError(err) {
+
+    let saveLog = await fs.writeFile(`${__dirname}/Logs/latest.log`, err.stack, {}, (error) => {
+        if (err) return console.log(`ERROR OCCURED LOGGING CRASH!` + error.stack)
+    });
+
 }
 
 module.exports = {
