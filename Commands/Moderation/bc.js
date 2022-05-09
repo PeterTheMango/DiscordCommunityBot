@@ -32,7 +32,7 @@ module.exports = class extends Command {
 
         await console.log(this.permissions)
 
-        if (!member.roles.cache.some(rl => this.permissions.includes(rl.id))) return message.reply({
+        if (!message.member.roles.cache.some(rl => this.permissions.includes(rl.id))) return message.reply({
             embeds: [noPermissionsEmbed]
         });
 
