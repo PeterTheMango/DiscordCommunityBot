@@ -42,7 +42,7 @@ async function init(Config) {
 
     process.on(`unhandledRejection`, async code => {
         await console.log(`Bot Crashed! Please refer to logs for more info!`);
-        await console.log(code)
+        await logError(code);
     });
 
 }
@@ -57,7 +57,7 @@ async function getClient() {
  */
 async function logError(err) {
 
-    let saveLog = await fs.writeFile(`${__dirname}/Logs/latest.log`, err.stack, {}, (error) => {
+    let saveLog = await fs.writeFile(`${__dirname}/Logs/latest.log`, err, {}, (error) => {
         if (err) return console.log(`ERROR OCCURED LOGGING CRASH!` + error.stack)
     });
 
