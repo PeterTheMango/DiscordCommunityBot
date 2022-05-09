@@ -82,28 +82,10 @@ module.exports = class extends Event {
             let commandCooldown = new Cooldown(message.member, "Command", Date.now() + 3000);
             await commandCooldown.save();
 
-            try {
-                await command.execute(message, args, db);
-            } catch (err) {
-                console.log(`Error while running ${command.name}! Please check logs to see the errors!`)
-                await logError(err);
-            }
-
+            await command.execute(message, args, db);
 
         }
 
     }
-
-}
-
-/**
- * 
- * @param {Error} err 
- */
-let logError = async function (err) {
-
-    let saveLog = await fs.writeFile(`${__dirname}/Logs/latest.log`, err.stack, {}, (error) => {
-        if (err) return console.log(`ERROR OCCURED LOGGING CRASH!` + error.stack)
-    });
 
 }

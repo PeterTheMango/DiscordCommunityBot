@@ -58,7 +58,11 @@ module.exports = class extends Command {
 		const userBalance = await getBalance(user.id);
 
 		message.channel.send({
-
+			embeds: [balanceEmbed.setDescription(balanceEmbed.description
+				.replace(`{user}`, `${user}`)
+				.replace(`{wallet}`, `${userBalance.wallet}`)
+				.replace(`{stored}`, `${userBalance.stored}`)
+			)]
 		});
 	}
 
