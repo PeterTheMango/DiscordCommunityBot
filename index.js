@@ -6,7 +6,7 @@ const {
 const Config = require(`./Assets/Config.json`);
 const fs = require(`fs`);
 
-await init(Config).catch(err => logError(err));
+init(Config).catch(err => logError(err));
 
 /**
  * 
