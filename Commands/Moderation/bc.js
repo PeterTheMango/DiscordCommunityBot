@@ -51,7 +51,9 @@ module.exports = class extends Command {
 
         await message.channel.send({
             embeds: [clearedEmbed.setDescription(clearedEmbed.description.replace(`{x}`, messageIds.length).replace(`{channel}`, `${message.channel}`))]
-        });
+        }).then(m => setTimeout(() => {
+            m.delete()
+        }, 5000));
 
     }
 
