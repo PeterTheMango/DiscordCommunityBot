@@ -48,7 +48,7 @@ module.exports = class extends Event {
                     iconURL: member.displayAvatarURL({
                         dynamic: true
                     })
-                }).setImage(Embeds.divider[i]).setThumbnail(`https://cdn.discordapp.com/emojis/859882092334153758.gif`).setColor("RANDOM")],
+                }).setImage(Embeds.divider[i]).setThumbnail(`https://cdn.discordapp.com/emojis/859882092334153758.gif`)],
                 components: [buttonRow]
             }).catch(m => console.log(`Unable to send message in welcome_channel. Missing Perms.`));
         }

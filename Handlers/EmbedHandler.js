@@ -2,7 +2,7 @@ const {
     MessageEmbed
 } = require("discord.js");
 const Emotes = require(`../Handlers/EmoteHandler`);
-const divider = [`https://cdn.discordapp.com/attachments/935532370860322827/972560266032193586/second_divider.gif`, `https://media.discordapp.net/attachments/859883140423614474/859883158493593600/dividerrr.gif`];
+const divider = [`https://cdn.discordapp.com/attachments/859880933041373217/974399365563154502/dividerrr.png`, `https://media.discordapp.net/attachments/859883140423614474/859883158493593600/dividerrr.gif`];
 let dividerIndex = 0;
 
 const WELCOME = new MessageEmbed({

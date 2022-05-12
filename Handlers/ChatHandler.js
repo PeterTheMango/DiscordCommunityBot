@@ -31,9 +31,21 @@ async function getDailyLeaders() {
  * @param {GuildMember} member 
  */
 async function getUserData(member) {
-    return Chat.findOne({
+    let q = await Chat.findOne({
         discord_id: member.id
     });
+    if (!q) {
+        q = await Chat.findOneAndUpdate({
+            discord_id: member.id
+        }, {
+            discord_id: member.id,
+            messages: 0
+        }, {
+            upsert: true,
+            new: true
+        });
+    }
+    return q;
 };
 
 /**
@@ -41,9 +53,21 @@ async function getUserData(member) {
  * @param {GuildMember} member 
  */
 async function getWeeklyUserData(member) {
-    return WeeklyChat.findOne({
+    let q = await WeeklyChat.findOne({
         discord_id: member.id
     });
+    if (!q) {
+        q = await WeeklyChat.findOneAndUpdate({
+            discord_id: member.id
+        }, {
+            discord_id: member.id,
+            messages: 0
+        }, {
+            upsert: true,
+            new: true
+        });
+    }
+    return q;
 };
 
 /**
@@ -80,77 +104,35 @@ async function createWeeklyLeaderboard(channel) {
 }
 
 /**
- * Reinitializes all sent leaderboards.
- * @param {Guild} guild 
+ * 
+ * @param {GuildMember} member 
  */
-async function startLeaderboards(guild) {
-
-    let leaderboards = await Leaderboard.find({});
-
-    await leaderboards.forEach(async record => {
-
-        let lbChannel = await guild.channels.fetch(record.channel_id).catch(err => console.log(`Unable to find channel with the ID of ${record.channel_id}!`));
-
-        if (!lbChannel) {
-            await Cooldown.findOneAndDelete({
-                discord_id: record.message_id
-            }).catch(err => console.log(`Unable to delete Leaderboard Cooldown for ${record.message_id}. Error: \n\n${err.toString()}`));
-            return Leaderboard.findOneAndDelete({
-                channel_id: record.channel_id,
-                type: record.type
-            }).catch(err => console.log(`Unable to delete leaderboard CH: ${record.channel_id}! Error:\n${err.toString()}`));
+async function addMessage(member) {
+    let oldData = await getUserData(member);
+    let newData = await Chat.findOneAndUpdate({
+        discord_id: member.id
+    }, {
+        $set: {
+            messages: oldData.messages + 1,
+            reward_messages: oldData.reward_messages
         }
-
-        if (!["GUILD_TEXT", "GUILD_NEWS"].includes(lbChannel.type)) {
-            await Cooldown.findOneAndDelete({
-                discord_id: record.message_id
-            }).catch(err => console.log(`Unable to delete Leaderboard Cooldown for ${record.message_id}. Error: \n\n${err.toString()}`));
-            return Leaderboard.findOneAndDelete({
-                channel_id: record.channel_id,
-                type: record.type
-            }).catch(err => console.log(`Unable to delete leaderboard CH: ${record.channel_id}! Error:\n${err.toString()}`));
-        }
-
-        let lbMessage = await lbChannel.messages.fetch(record.message_id).catch(err => {
-            console.log(`Unable to find message with the id of ${record.discord_id}`)
-            lb_msg = null
-        });
-        if (!lbMessage) {
-            await Cooldown.findOneAndDelete({
-                discord_id: record.message_id
-            }).catch(err => console.log(`Unable to delete Leaderboard Cooldown for ${record.message_id}. Error: \n\n${err.toString()}`));
-            return Leaderboard.findOneAndDelete({
-                channel_id: record.channel_id,
-                type: record.type
-            }).catch(err => console.log(`Unable to delete leaderboard CH: ${record.channel_id}! Error:\n${err.toString()}`));
-        }
-
-        let leaderboard;
-        if (record.type === "Daily_XP") {
-            leaderboard = new DailyXpLeaderboard(guild, lbChannel, getDailyLeaders(), lbMessage);
-            await dailyLbCollection.set(lbMessage.id, leaderboard);
-        } else if (record.type === "Weekly_XP") {
-            leaderboard = new WeeklyXpLeaderboard(guild, lbChannel, getWeeklyLeaders(), lbMessage);
-            await weeklyLbCollection.set(lbMessage.id, leaderboard);
-        } else if (record.type === "AllTime_XP") {
-            leaderboard = new AllTimeXpLeaderboard(guild, lbChannel, getLeaders(), lbMessage)
-        } else if (record.type === "AllTime_Level") {
-            leaderboard = new AllTimeLevelLeaderboard(guild, lbChannel, getLevelLeaders(), lbMessage)
-        }
-
-        await leaderboard.update();
-
-        setInterval(() => {
-            leaderboard.update()
-        }, 300000);
-
+    }, {
+        upsert: true,
+        new: true
     });
-
-    await setTimeout(async () => {
-        await CooldownHandler.registerDailyCooldowns(dailyLbCollection);
-        await CooldownHandler.registerWeeklyCooldowns(weeklyLbCollection);
-    }, 1000)
-
+    let oldWeeklyData = await getWeeklyUserData(member);
+    let newWeeklyData = await WeeklyChat.findOneAndUpdate({}, {
+        $set: {
+            messages: oldWeeklyData + 1
+        }
+    }, {
+        upsert: true,
+        new: true
+    });
+    return {
+        newData,
+        newWeeklyData
+    };
 }
 
 module.exports = {
@@ -161,5 +143,6 @@ module.exports = {
     getWeeklyUserData,
     createAllTimeLeaderboard,
     createDailyLeaderboard,
-    createWeeklyLeaderboard
+    createWeeklyLeaderboard,
+    addMessage
 }

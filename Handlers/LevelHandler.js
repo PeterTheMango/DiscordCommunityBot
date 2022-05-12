@@ -110,12 +110,21 @@ async function getUserLevel(member) {
  * @returns {String[]} All the level data regarding a user.
  */
 async function getWeeklyXP(member) {
-    let results = await WeeklyXP.findOne({
+    let q = await WeeklyXP.findOne({
         discord_id: member.id
     });
-
-    if (!results) {
-        results = null;
+    if (!q) {
+        q = await WeeklyXP.findOneAndUpdate({
+            discord_id: member.id
+        }, {
+            discord_id: member.id,
+            xp: 0,
+            level: 1,
+            time: 0
+        }, {
+            upsert: true,
+            new: true
+        });
     }
 
     return results;
