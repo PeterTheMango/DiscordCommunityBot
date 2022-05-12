@@ -25,7 +25,7 @@ module.exports = class extends Event {
         }).catch(err => console.log(`Unable to send message to ${member.user.username}! Reason: Locked DMs.`));
 
         // Guild Messages
-		
+
         let button1 = new MessageButton({
             style: "LINK",
             customID: `getRolesButton`,
@@ -33,11 +33,11 @@ module.exports = class extends Event {
             label: "Grab Roles!",
             url: "https://discord.com/channels/727649662475173962/936475008493039676"
         });
-        
+
         let buttonRow = new MessageActionRow({
             components: [button1]
         });
-        
+
         let welcome_channel = member.guild.channels.cache.get(Config.channels.welcome_channel);
         if (welcome_channel) {
             let i = await Embeds.setDivider();
@@ -48,7 +48,7 @@ module.exports = class extends Event {
                     iconURL: member.displayAvatarURL({
                         dynamic: true
                     })
-                }).setImage(Embeds.divider[i]).setThumbnail(`https://cdn.discordapp.com/emojis/859882092334153758.gif`)],
+                }).setImage(Embeds.divider[i]).setThumbnail(`https://cdn.discordapp.com/emojis/859882092334153758.gif`).setColor("RANDOM")],
                 components: [buttonRow]
             }).catch(m => console.log(`Unable to send message in welcome_channel. Missing Perms.`));
         }

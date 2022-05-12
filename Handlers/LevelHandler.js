@@ -13,7 +13,13 @@ const Leaderboard = require(`../Models/Leaderboard`);
 const DailyXpLeaderboard = require(`./Classes/DailyXpLeaderboard`);
 const WeeklyXpLeaderboard = require(`./Classes/WeeklyXpLeaderboard`);
 const AllTimeXpLeaderboard = require(`./Classes/AllTimeXpLeaderboard`);
-const AllTimeLevelLeaderboard = require(`./Classes/LevelLeaderboard`)
+const AllTimeLevelLeaderboard = require(`./Classes/LevelLeaderboard`);
+
+const AllTimeChatLeaderboard = require(`./Classes/AllTimeChatLeaderboard`);
+const WeeklyLeaderboard = require(`./Classes/WeeklyChatLeaderboard`);
+const DailyLeaderboard = require(`./Classes/DailyChatLeaderboard`);
+
+const ChatHandler = require(`./ChatHandler`);
 
 const Cooldown = require("../Models/Cooldown");
 const CooldownHandler = require(`./CooldownHandler`);
@@ -75,21 +81,23 @@ async function getLevelLeaders() {
  */
 async function getUserLevel(member) {
     let results;
-    
-    let query = await Level.findOne({discord_id: member.id});
-    
-    if(!query) {
-        results = await Level.findOneAndUpdate({
+
+    let query = await Level.findOne({
         discord_id: member.id
-    }, {
-        discord_id: member.id,
-        xp: 0,
-        level: 1,
-        time: 0
-    }, {
-        upsert: true,
-        new: true
     });
+
+    if (!query) {
+        results = await Level.findOneAndUpdate({
+            discord_id: member.id
+        }, {
+            discord_id: member.id,
+            xp: 0,
+            level: 1,
+            time: 0
+        }, {
+            upsert: true,
+            new: true
+        });
     } else {
         results = query
     }
@@ -458,15 +466,23 @@ async function startLeaderboards(guild) {
 
         let leaderboard;
         if (record.type === "Daily_XP") {
-            leaderboard = new DailyXpLeaderboard(guild, lbChannel, getDailyLeaders(), lbMessage);
+            leaderboard = new DailyXpLeaderboard(guild, lbChannel, await getDailyLeaders(), lbMessage);
             await dailyLbCollection.set(lbMessage.id, leaderboard);
         } else if (record.type === "Weekly_XP") {
-            leaderboard = new WeeklyXpLeaderboard(guild, lbChannel, getWeeklyLeaders(), lbMessage);
+            leaderboard = new WeeklyXpLeaderboard(guild, lbChannel, await getWeeklyLeaders(), lbMessage);
             await weeklyLbCollection.set(lbMessage.id, leaderboard);
         } else if (record.type === "AllTime_XP") {
-            leaderboard = new AllTimeXpLeaderboard(guild, lbChannel, getLeaders(), lbMessage)
+            leaderboard = new AllTimeXpLeaderboard(guild, lbChannel, await getLeaders(), lbMessage)
         } else if (record.type === "AllTime_Level") {
-            leaderboard = new AllTimeLevelLeaderboard(guild, lbChannel, getLevelLeaders(), lbMessage)
+            leaderboard = new AllTimeLevelLeaderboard(guild, lbChannel, await getLevelLeaders(), lbMessage)
+        } else if (record.type === "AllTime_Chat") {
+            leaderboard = new AllTimeChatLeaderboard(guild, lbChannel, await ChatHandler.getAllTimeLeaders(), lbMessage)
+        } else if (record.type === "Daily_Chat") {
+            leaderboard = new DailyLeaderboard(guild, lbChannel, await ChatHandler.getDailyLeaders(), lbMessage);
+            await dailyLbCollection.set(lbMessage.id, leaderboard);
+        } else if (record.type === "Weekly_Chat") {
+            leaderboard = new WeeklyLeaderboard(guild, lbChannel, await ChatHandler.getWeeklyLeaders(), lbMessage)
+            await weeklyLbCollection.set(lbMessage.id, leaderboard);
         }
 
         await leaderboard.update();
