@@ -76,11 +76,11 @@ async function getWeeklyUserData(member) {
  * @param {GuildMember} member 
  */
 async function getDailyUserData(member) {
-    let q = await WeeklyChat.findOne({
+    let q = await DailyChat.findOne({
         discord_id: member.id
     });
     if (!q) {
-        q = await WeeklyChat.findOneAndUpdate({
+        q = await DailyChat.findOneAndUpdate({
             discord_id: member.id
         }, {
             discord_id: member.id,
@@ -163,7 +163,8 @@ async function addMessage(member) {
     });
     return {
         newData,
-        newWeeklyData
+        newWeeklyData,
+        newDailyData
     };
 }
 
