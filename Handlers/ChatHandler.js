@@ -61,7 +61,7 @@ async function getWeeklyUserData(member) {
     await console.log(member.displayName)
     await console.log(q);
     if (!q) {
-        q = await WeeklyChat.findOneAndUpdate({
+        q = new WeeklyChat.findOneAndUpdate({
             discord_id: member.id
         }, {
             discord_id: member.id,
@@ -147,7 +147,9 @@ async function addMessage(member) {
         new: true
     });
     let oldWeeklyData = await getWeeklyUserData(member);
-    let newWeeklyData = await WeeklyChat.findOneAndUpdate({}, {
+    let newWeeklyData = await WeeklyChat.findOneAndUpdate({
+        discord_id: member.id
+    }, {
         $set: {
             messages: oldWeeklyData.messages + 1
         }
@@ -156,7 +158,9 @@ async function addMessage(member) {
         new: true
     });
     let oldDailyData = await getDailyUserData(member);
-    let newDailyData = await DailyChat.findOneAndUpdate({}, {
+    let newDailyData = await DailyChat.findOneAndUpdate({
+        discord_id: member.id
+    }, {
         $set: {
             messages: oldDailyData.messages + 1
         }
