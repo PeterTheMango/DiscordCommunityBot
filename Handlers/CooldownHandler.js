@@ -77,9 +77,7 @@ async function registerDailyCooldowns(dailyLbCollection) {
     await xpCooldowns.forEach(async cl => {
         let lb = await dailyLbCollection.get(cl.discord_id);
         if (lb) {
-            console.log(`found`);
             await setTimeout(async () => {
-                await console.log(`Yeah i reset lbs`);
                 await lb.reset()
             }, cl.end - Date.now());
         }
@@ -92,9 +90,7 @@ async function registerDailyCooldowns(dailyLbCollection) {
     await chatCooldowns.forEach(async cl => {
         let lb = await dailyLbCollection.get(cl.discord_id);
         if (lb) {
-            console.log(`found2`);
             await setTimeout(async () => {
-                await console.log(`Yeah i reset lbs2`);
                 await lb.reset()
             }, cl.end - Date.now());
         }
@@ -117,9 +113,7 @@ async function registerWeeklyCooldowns(weeklyLbCollection) {
     await xpCooldowns.forEach(async cl => {
         let lb = await weeklyLbCollection.get(cl.discord_id);
         if (lb) {
-            console.log(`found`);
             await setTimeout(async () => {
-                await console.log(`Yeah i reset lbs`);
                 await lb.reset()
             }, cl.end - Date.now());
         }
@@ -132,9 +126,7 @@ async function registerWeeklyCooldowns(weeklyLbCollection) {
     await chatCooldowns.forEach(async cl => {
         let lb = await weeklyLbCollection.get(cl.discord_id);
         if (lb) {
-            console.log(`found2`);
             await setTimeout(async () => {
-                await console.log(`Yeah i reset lbs2`);
                 await lb.reset()
             }, cl.end - Date.now());
         }
