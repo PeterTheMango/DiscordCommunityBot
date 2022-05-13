@@ -27,11 +27,17 @@ module.exports = class extends Command {
 
         await message.channel.send(`Getting all users now.`);
 
-        let members = await message.guild.members.fetch({limit: message.guild.memberCount});
+        let members = await message.guild.members.fetch({
+            limit: message.guild.memberCount
+        });
 
         await message.channel.send(`Got all users. Restoring roles now.`);
 
         await members.forEach(async m => {
+
+            if (m.user.bot) return Level.findOneAndDelete({
+                discord_id: m.id
+            });
 
             let roles = [
                 '792418314998644736',
@@ -53,210 +59,241 @@ module.exports = class extends Command {
                 '787033174173024306'
             ];
 
-            if(m.roles.cache.get(roles[0])){
-                return Level.findOneAndUpdate({discord_id: m.id},{
-                    $set:{
+            if (m.roles.cache.get(roles[0])) {
+                return Level.findOneAndUpdate({
+                    discord_id: m.id
+                }, {
+                    $set: {
                         discord_id: m.id,
                         xp: 0,
                         time: 0,
                         level: 83
                     }
-                },{
+                }, {
                     upsert: true,
                     new: true
                 });
-            } else if(m.roles.cache.get(roles[1])){
-                return Level.findOneAndUpdate({discord_id: m.id},{
-                    $set:{
+            } else if (m.roles.cache.get(roles[1])) {
+                return Level.findOneAndUpdate({
+                    discord_id: m.id
+                }, {
+                    $set: {
                         discord_id: m.id,
                         xp: 0,
                         time: 0,
                         level: 78
                     }
-                },{
+                }, {
                     upsert: true,
                     new: true
                 });
-            } else if(m.roles.cache.get(roles[2])){
-                return Level.findOneAndUpdate({discord_id: m.id},{
-                    $set:{
+            } else if (m.roles.cache.get(roles[2])) {
+                return Level.findOneAndUpdate({
+                    discord_id: m.id
+                }, {
+                    $set: {
                         discord_id: m.id,
                         xp: 0,
                         time: 0,
                         level: 73
                     }
-                },{
+                }, {
                     upsert: true,
                     new: true
                 });
-            }else if(m.roles.cache.get(roles[3])){
-                return Level.findOneAndUpdate({discord_id: m.id},{
-                    $set:{
+            } else if (m.roles.cache.get(roles[3])) {
+                return Level.findOneAndUpdate({
+                    discord_id: m.id
+                }, {
+                    $set: {
                         discord_id: m.id,
                         xp: 0,
                         time: 0,
                         level: 68
                     }
-                },{
+                }, {
                     upsert: true,
                     new: true
                 });
-            }else if(m.roles.cache.get(roles[4])){
-                return Level.findOneAndUpdate({discord_id: m.id},{
-                    $set:{
+            } else if (m.roles.cache.get(roles[4])) {
+                return Level.findOneAndUpdate({
+                    discord_id: m.id
+                }, {
+                    $set: {
                         discord_id: m.id,
                         xp: 0,
                         time: 0,
                         level: 63
                     }
-                },{
+                }, {
                     upsert: true,
                     new: true
                 });
-            }else if(m.roles.cache.get(roles[5])){
-                return Level.findOneAndUpdate({discord_id: m.id},{
-                    $set:{
+            } else if (m.roles.cache.get(roles[5])) {
+                return Level.findOneAndUpdate({
+                    discord_id: m.id
+                }, {
+                    $set: {
                         discord_id: m.id,
                         xp: 0,
                         time: 0,
                         level: 58
                     }
-                },{
+                }, {
                     upsert: true,
                     new: true
                 });
-            }else if(m.roles.cache.get(roles[6])){
-                return Level.findOneAndUpdate({discord_id: m.id},{
-                    $set:{
+            } else if (m.roles.cache.get(roles[6])) {
+                return Level.findOneAndUpdate({
+                    discord_id: m.id
+                }, {
+                    $set: {
                         discord_id: m.id,
                         xp: 0,
                         time: 0,
                         level: 53
                     }
-                },{
+                }, {
                     upsert: true,
                     new: true
                 });
-            }else if(m.roles.cache.get(roles[7])){
-                return Level.findOneAndUpdate({discord_id: m.id},{
-                    $set:{
+            } else if (m.roles.cache.get(roles[7])) {
+                return Level.findOneAndUpdate({
+                    discord_id: m.id
+                }, {
+                    $set: {
                         discord_id: m.id,
                         xp: 0,
                         time: 0,
                         level: 48
                     }
-                },{
+                }, {
                     upsert: true,
                     new: true
                 });
-            }
-            else if(m.roles.cache.get(roles[8])){
-                return Level.findOneAndUpdate({discord_id: m.id},{
-                    $set:{
+            } else if (m.roles.cache.get(roles[8])) {
+                return Level.findOneAndUpdate({
+                    discord_id: m.id
+                }, {
+                    $set: {
                         discord_id: m.id,
                         xp: 0,
                         time: 0,
                         level: 43
                     }
-                },{
+                }, {
                     upsert: true,
                     new: true
                 });
-            }else if(m.roles.cache.get(roles[9])){
-                return Level.findOneAndUpdate({discord_id: m.id},{
-                    $set:{
+            } else if (m.roles.cache.get(roles[9])) {
+                return Level.findOneAndUpdate({
+                    discord_id: m.id
+                }, {
+                    $set: {
                         discord_id: m.id,
                         xp: 0,
                         time: 0,
                         level: 38
                     }
-                },{
+                }, {
                     upsert: true,
                     new: true
                 });
-            }
-            else if(m.roles.cache.get(roles[10])){
-                return Level.findOneAndUpdate({discord_id: m.id},{
-                    $set:{
+            } else if (m.roles.cache.get(roles[10])) {
+                return Level.findOneAndUpdate({
+                    discord_id: m.id
+                }, {
+                    $set: {
                         discord_id: m.id,
                         xp: 0,
                         time: 0,
                         level: 33
                     }
-                },{
+                }, {
                     upsert: true,
                     new: true
                 });
-            }else if(m.roles.cache.get(roles[11])){
-                return Level.findOneAndUpdate({discord_id: m.id},{
-                    $set:{
+            } else if (m.roles.cache.get(roles[11])) {
+                return Level.findOneAndUpdate({
+                    discord_id: m.id
+                }, {
+                    $set: {
                         discord_id: m.id,
                         xp: 0,
                         time: 0,
                         level: 28
                     }
-                },{
+                }, {
                     upsert: true,
                     new: true
                 });
-            }else if(m.roles.cache.get(roles[12])){
-                return Level.findOneAndUpdate({discord_id: m.id},{
-                    $set:{
+            } else if (m.roles.cache.get(roles[12])) {
+                return Level.findOneAndUpdate({
+                    discord_id: m.id
+                }, {
+                    $set: {
                         discord_id: m.id,
                         xp: 0,
                         time: 0,
                         level: 23
                     }
-                },{
+                }, {
                     upsert: true,
                     new: true
                 });
-            }else if(m.roles.cache.get(roles[13])){
-                return Level.findOneAndUpdate({discord_id: m.id},{
-                    $set:{
+            } else if (m.roles.cache.get(roles[13])) {
+                return Level.findOneAndUpdate({
+                    discord_id: m.id
+                }, {
+                    $set: {
                         discord_id: m.id,
                         xp: 0,
                         time: 0,
                         level: 18
                     }
-                },{
+                }, {
                     upsert: true,
                     new: true
                 });
-            }else if(m.roles.cache.get(roles[14])){
-                return Level.findOneAndUpdate({discord_id: m.id},{
-                    $set:{
+            } else if (m.roles.cache.get(roles[14])) {
+                return Level.findOneAndUpdate({
+                    discord_id: m.id
+                }, {
+                    $set: {
                         discord_id: m.id,
                         xp: 0,
                         time: 0,
                         level: 13
                     }
-                },{
+                }, {
                     upsert: true,
                     new: true
                 });
-            }else if(m.roles.cache.get(roles[15])){
-                return Level.findOneAndUpdate({discord_id: m.id},{
-                    $set:{
+            } else if (m.roles.cache.get(roles[15])) {
+                return Level.findOneAndUpdate({
+                    discord_id: m.id
+                }, {
+                    $set: {
                         discord_id: m.id,
                         xp: 0,
                         time: 0,
                         level: 8
                     }
-                },{
+                }, {
                     upsert: true,
                     new: true
                 });
-            }
-            else if(m.roles.cache.get(roles[16])){
-                return Level.findOneAndUpdate({discord_id: m.id},{
-                    $set:{
+            } else if (m.roles.cache.get(roles[16])) {
+                return Level.findOneAndUpdate({
+                    discord_id: m.id
+                }, {
+                    $set: {
                         discord_id: m.id,
                         xp: 0,
                         time: 0,
                         level: 3
                     }
-                },{
+                }, {
                     upsert: true,
                     new: true
                 });
