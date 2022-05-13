@@ -23,7 +23,6 @@ module.exports = class extends Event {
 
         // if (![`192715014602358784`, `376308669576511500`].includes(message.author.id)) return;
 
-
         let hasRobCooldown = await CooldownManager.findOne({
             discord_id: message.member.id,
             type: "RobMsg"
