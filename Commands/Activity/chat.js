@@ -4,7 +4,6 @@ const {
 } = require("discord.js");
 const Command = require(`../../Structures/Command`);
 const ChatHandler = require(`../../Handlers/ChatHandler`);
-const format = require(`humanize-duration`);
 
 module.exports = class extends Command {
 
@@ -40,7 +39,7 @@ module.exports = class extends Command {
         }
 
         await message.channel.send({
-            embeds: [embed.setDescription(embed.description.replace(`msgs`, format(wChat.messages)))]
+            embeds: [embed.setDescription(embed.description.replace(`msgs`, wChat.messages))]
         })
 
     }
