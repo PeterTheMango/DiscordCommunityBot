@@ -498,7 +498,7 @@ async function startLeaderboards(guild) {
 
         setInterval(() => {
             leaderboard.update()
-        }, 300000);
+        }, 5000);
 
     });
 
