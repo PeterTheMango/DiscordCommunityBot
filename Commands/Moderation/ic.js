@@ -24,8 +24,6 @@ module.exports = class extends Command {
      */
     async execute(message, args) {
 
-        await message.delete();
-
         let noPermissionsEmbed = new MessageEmbed({
             color: 'RED',
             description: `${message.member} <a:egp_no:935209428070854717> You can not use this command!`,
@@ -48,6 +46,10 @@ module.exports = class extends Command {
         messages = await messages.filter(m => (m.attachments.size >= 1 || m.embeds.length >= 1) && !m.author.bot);
         let messageIds = [];
         await messages.forEach(m => messageIds.push(m.id));
+
+        if (messageIds.length < 1) return message.reply({
+            content: `Unable to clear bot messages. No messages found!`
+        });
 
         await message.channel.bulkDelete(messageIds, true);
 
