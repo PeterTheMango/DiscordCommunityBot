@@ -104,7 +104,7 @@ class DailyChatLeaderboard {
 
         for (let i = 0; i < this.leaders.length; i++) {
 
-            topTenMembers += `${placementIcons[i]} <@${this.leaders[i].discord_id}> <a:arrowegp:852967066381844520> **${this.leaders[i].message}**\n`;
+            topTenMembers += `${placementIcons[i]} <@${this.leaders[i].discord_id}> <a:arrowegp:852967066381844520> **${this.leaders[i].messages}**\n`;
 
         }
 
