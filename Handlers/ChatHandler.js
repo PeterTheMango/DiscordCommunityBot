@@ -152,19 +152,19 @@ async function addMessage(member) {
         upsert: true,
         new: true
     });
-    let oldDailyData = await getDailyUserData(member);
-    let newDailyData = await DailyChat.findOneAndUpdate({}, {
-        $set: {
-            messages: oldDailyData + 1
-        }
-    }, {
-        upsert: true,
-        new: true
-    });
+    // let oldDailyData = await getDailyUserData(member);
+    // let newDailyData = await DailyChat.findOneAndUpdate({}, {
+    //     $set: {
+    //         messages: oldDailyData + 1
+    //     }
+    // }, {
+    //     upsert: true,
+    //     new: true
+    // });
     return {
         newData,
         newWeeklyData,
-        newDailyData
+
     };
 }
 
