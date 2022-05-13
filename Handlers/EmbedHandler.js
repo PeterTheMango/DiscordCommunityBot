@@ -23,8 +23,7 @@ const NEW_USER_CHANNEL = new MessageEmbed({
     footer: {
         iconURL: Emotes.CHAT_HEART,
         text: `Enjoy your stay!`
-    },
-    color: "RANDOM"
+    }
 })
 
 module.exports = {
