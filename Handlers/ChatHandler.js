@@ -58,8 +58,6 @@ async function getWeeklyUserData(member) {
         discord_id: member.id
     });
 
-    await console.log(member.displayName)
-    await console.log(q);
     if (!q) {
         q = new WeeklyChat.findOneAndUpdate({
             discord_id: member.id

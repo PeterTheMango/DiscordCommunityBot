@@ -31,12 +31,13 @@ class WeeklyChatLeaderboard {
      */
     async reset() {
 
+        await WeeklyChat.deleteMany({}).catch(err => console.log(`Unable to drop Weekly Chat collection. See Error Below!\n\n${err.toString()}`));
+
         let currentCooldown = await CooldownsRecords.find({
             discord_id: this.message.id,
             type: "weeklychatlb_reset"
         });
         if (currentCooldown) {
-            console.log(`test`)
             await CooldownsRecords.deleteOne({
                 discord_id: this.message.id,
                 type: "weeklychatlb_reset"
@@ -46,8 +47,6 @@ class WeeklyChatLeaderboard {
         await weeklyCooldown.save();
 
         await setTimeout(async () => this.reset(), 604800000);
-        await WeeklyChat.deleteMany({}).catch(err => console.log(`Unable to drop Weekly Chat collection. See Error Below!\n\n${err.toString()}`));
-        await console.log(`i reset`)
 
 
     }

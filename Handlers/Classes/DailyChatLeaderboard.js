@@ -37,7 +37,6 @@ class DailyChatLeaderboard {
             type: "dailychatlb_reset"
         });
         if (currentCooldown) {
-            console.log(`reset`)
             await CooldownsRecords.deleteOne({
                 discord_id: this.message.id,
                 type: "dailychatlb_reset"
