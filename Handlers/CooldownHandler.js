@@ -55,8 +55,8 @@ async function registerUserCooldowns() {
                     if (!guild) return;
                     let member = await guild.members.cache.get(cl.discord_id);
                     if (!member) return;
-                    let muted = new userMutenLog(member, null, null, 0, guild);
-                    await noVC.sendUserComplete();
+                    let muted = new userMuteLog(member, null, null, 0, guild);
+                    await muted.sendUserComplete();
                     await member.roles.remove(moderation.mute_role).catch(err => `Unable to remove mute role from users. Missing perms/error?\n\n$` + err);
                 }
 
