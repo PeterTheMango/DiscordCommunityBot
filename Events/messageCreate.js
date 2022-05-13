@@ -8,7 +8,8 @@ const CooldownManager = require(`../Models/Cooldown`);
 const Cooldown = require(`../Structures/Cooldown`);
 const Emotes = require(`../Handlers/EmoteHandler`);
 const format_time = require(`humanize-duration`);
-const ChatHandler = require(`../Handlers/ChatHandler`)
+const ChatHandler = require(`../Handlers/ChatHandler`);
+const Config = require(`../Assets/Config.json`);
 
 module.exports = class extends Event {
 
@@ -50,7 +51,7 @@ module.exports = class extends Event {
             }
         }
 
-        await ChatHandler.addMessage(message.member);
+        if (Config.channels.chatting_channels.includes(message.channel.id)) await ChatHandler.addMessage(message.member);
 
         //  if (![`192715014602358784`, `376308669576511500`].includes(message.author.id)) return;
 
@@ -72,6 +73,8 @@ module.exports = class extends Event {
                 },
                 color: `RED`
             });
+
+            if (!Config.channels.command_channels.includes(message.channel.id)) return;
 
             let hasCommandCooldown = await CooldownManager.findOne({
                 discord_id: message.member.id,
