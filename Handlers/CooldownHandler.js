@@ -83,6 +83,14 @@ async function registerDailyCooldowns(dailyLbCollection) {
                     }, cl.end - Date.now())
                 }
                 return;
+            } else if (cl.type === "dailychatlb_reset") {
+                let lb = dailyLbCollection.get(cl.discord_id);
+                if (lb) {
+                    setTimeout(() => {
+                        lb.reset();
+                    }, cl.end - Date.now())
+                }
+                return;
             }
 
         });
@@ -99,6 +107,14 @@ async function registerWeeklyCooldowns(weeklyLbCollection) {
         await allCooldowns.forEach(cl => {
 
             if (cl.type === "weeklylb_reset") {
+                let lb = weeklyLbCollection.get(cl.discord_id);
+                if (lb) {
+                    setTimeout(() => {
+                        lb.reset();
+                    }, cl.end - Date.now())
+                }
+                return;
+            } else if (cl.type === "weeklychatlb_reset") {
                 let lb = weeklyLbCollection.get(cl.discord_id);
                 if (lb) {
                     setTimeout(() => {

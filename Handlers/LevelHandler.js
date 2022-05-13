@@ -505,7 +505,7 @@ async function startLeaderboards(guild) {
     await setTimeout(async () => {
         await CooldownHandler.registerDailyCooldowns(dailyLbCollection);
         await CooldownHandler.registerWeeklyCooldowns(weeklyLbCollection);
-    }, 1000)
+    }, 5000)
 
 }
 
