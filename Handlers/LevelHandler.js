@@ -350,13 +350,11 @@ async function giveLevelRank(member) {
         roles = [];
     }
 
-    try {
-        await member.roles.add(roles);
-    } catch (err) {
-        console.log(err);
-    }
-
-
+    await roles.forEach(id => {
+        let role = await member.guild.roles.cache.get(id);
+        if (!role) return;
+        if (!member.roles.cache.get(role.id)) return member.roles.add(role.id);
+    });
 
 }
 
