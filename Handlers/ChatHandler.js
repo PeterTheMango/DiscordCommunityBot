@@ -3,7 +3,7 @@ const {
 } = require("discord.js");
 const Chat = require(`../Models/Chat`);
 const WeeklyChat = require(`../Models/WeeklyChat`);
-const DailyChat = require(`../Models/WeeklyChat`);
+const DailyChat = require(`../Models/DailyChat`);
 const AllTimeChatLeaderboard = require(`./Classes/AllTimeChatLeaderboard`);
 const WeeklyLeaderboard = require(`./Classes/WeeklyChatLeaderboard`);
 const DailyLeaderboard = require(`./Classes/DailyChatLeaderboard`);
