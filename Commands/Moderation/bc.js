@@ -49,6 +49,8 @@ module.exports = class extends Command {
         let messageIds = [];
         await messages.forEach(m => messageIds.push(m.id));
 
+        if (messageIds.length < 1) return message.reply(`Unable to clear bot messages. No messages found!`);
+
         await message.channel.bulkDelete(messageIds, true);
 
         await message.channel.send({
