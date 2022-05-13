@@ -39,7 +39,8 @@ async function getUserData(member) {
             discord_id: member.id
         }, {
             discord_id: member.id,
-            messages: 0
+            messages: 0,
+            reward_messages: 0
         }, {
             upsert: true,
             new: true
