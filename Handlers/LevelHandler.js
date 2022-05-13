@@ -127,7 +127,7 @@ async function getWeeklyXP(member) {
         });
     }
 
-    return results;
+    return q;
 }
 
 /**
