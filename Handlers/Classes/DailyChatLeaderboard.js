@@ -31,12 +31,13 @@ class DailyChatLeaderboard {
      */
     async reset() {
 
-        await DailyChat.deleteMany({}).catch(err => console.log(`Unable to drop Daily XP collection. See Error Below!\n\n${err.toString()}`));
+        await DailyChat.deleteMany({}).catch(err => console.log(`Unable to drop Daily Chat collection. See Error Below!\n\n${err.toString()}`));
         let currentCooldown = await CooldownsRecords.find({
             discord_id: this.message.id,
             type: "dailychatlb_reset"
         });
         if (currentCooldown) {
+            console.log(`reset`)
             await CooldownsRecords.deleteOne({
                 discord_id: this.message.id,
                 type: "dailychatlb_reset"
@@ -45,7 +46,7 @@ class DailyChatLeaderboard {
         let dailyCooldown = new Cooldown(this.message, "dailychatlb_reset", Date.now() + 86400000);
         await dailyCooldown.save();
 
-        setTimeout(async () => this.reset(), 86400000);
+        await setTimeout(async () => this.reset(), 86400000);
 
 
     }

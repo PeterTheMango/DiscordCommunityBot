@@ -37,6 +37,7 @@ class WeeklyChatLeaderboard {
             type: "weeklychatlb_reset"
         });
         if (currentCooldown) {
+            console.log(`test`)
             await CooldownsRecords.deleteOne({
                 discord_id: this.message.id,
                 type: "weeklychatlb_reset"
@@ -45,7 +46,7 @@ class WeeklyChatLeaderboard {
         let weeklyCooldown = new Cooldown(this.message, "weeklychatlb_reset", Date.now() + 604800000);
         await weeklyCooldown.save();
 
-        setTimeout(async () => this.reset(), 604800000);
+        await setTimeout(async () => this.reset(), 604800000);
 
 
     }
