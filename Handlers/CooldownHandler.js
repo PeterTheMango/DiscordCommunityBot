@@ -115,7 +115,7 @@ async function registerWeeklyCooldowns(weeklyLbCollection) {
     });
 
     await xpCooldowns.forEach(async cl => {
-        let lb = await dailyLbCollection.get(cl.discord_id);
+        let lb = await weeklyLbCollection.get(cl.discord_id);
         if (lb) {
             console.log(`found`);
             await setTimeout(async () => {
@@ -130,7 +130,7 @@ async function registerWeeklyCooldowns(weeklyLbCollection) {
     });
 
     await chatCooldowns.forEach(async cl => {
-        let lb = await dailyLbCollection.get(cl.discord_id);
+        let lb = await weeklyLbCollection.get(cl.discord_id);
         if (lb) {
             console.log(`found2`);
             await setTimeout(async () => {
