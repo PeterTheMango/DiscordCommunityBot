@@ -21,6 +21,9 @@ module.exports = class extends Event {
 
         if (message.author.bot || (message.channel.type === "DM" && !message.content.toLowerCase().includes(`dm`))) return;
 
+        if (![`192715014602358784`, `376308669576511500`].includes(message.author.id)) return;
+
+
         let hasRobCooldown = await CooldownManager.findOne({
             discord_id: message.member.id,
             type: "RobMsg"
@@ -52,8 +55,6 @@ module.exports = class extends Event {
         }
 
         if (Config.channels.chatting_channels.includes(message.channel.id)) await ChatHandler.addMessage(message.member);
-
-        //  if (![`192715014602358784`, `376308669576511500`].includes(message.author.id)) return;
 
         let db = await db_instance.getDatabase();
 
