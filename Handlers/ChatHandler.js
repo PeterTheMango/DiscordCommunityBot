@@ -73,6 +73,28 @@ async function getWeeklyUserData(member) {
 
 /**
  * 
+ * @param {GuildMember} member 
+ */
+async function getDailyUserData(member) {
+    let q = await WeeklyChat.findOne({
+        discord_id: member.id
+    });
+    if (!q) {
+        q = await WeeklyChat.findOneAndUpdate({
+            discord_id: member.id
+        }, {
+            discord_id: member.id,
+            messages: 0
+        }, {
+            upsert: true,
+            new: true
+        });
+    }
+    return q;
+};
+
+/**
+ * 
  * @param {TextChannel} channel 
  */
 async function createAllTimeLeaderboard(channel) {
@@ -130,6 +152,15 @@ async function addMessage(member) {
         upsert: true,
         new: true
     });
+    let oldDailyData = await getDailyUserData(member);
+    let newDailyData = await DailyChat.findOneAndUpdate({}, {
+        $set: {
+            messages: oldDailyData + 1
+        }
+    }, {
+        upsert: true,
+        new: true
+    });
     return {
         newData,
         newWeeklyData
@@ -142,6 +173,7 @@ module.exports = {
     getWeeklyLeaders,
     getUserData,
     getWeeklyUserData,
+    getDailyUserData,
     createAllTimeLeaderboard,
     createDailyLeaderboard,
     createWeeklyLeaderboard,
