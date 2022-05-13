@@ -70,62 +70,80 @@ async function registerUserCooldowns() {
 
 async function registerDailyCooldowns(dailyLbCollection) {
 
-    return new Promise(async (res, rej) => {
-        let allCooldowns = await model.find();
+    let xpCooldowns = await model.find({
+        type: "dailylb_reset"
+    });
 
-        await allCooldowns.forEach(cl => {
+    await xpCooldowns.forEach(async cl => {
+        let lb = await dailyLbCollection.get(cl.discord_id);
+        if (lb) {
+            console.log(`found`);
+            await setTimeout(async () => {
+                await console.log(`Yeah i reset lbs`);
+                await lb.reset()
+            }, cl.end - Date.now());
+        }
+    });
 
-            if (cl.type === "dailylb_reset") {
-                let lb = dailyLbCollection.get(cl.discord_id);
-                if (lb) {
-                    setTimeout(() => {
-                        lb.reset();
-                    }, cl.end - Date.now())
-                }
-                return;
-            } else if (cl.type === "dailychatlb_reset") {
-                let lb = dailyLbCollection.get(cl.discord_id);
-                if (lb) {
-                    setTimeout(() => {
-                        lb.reset();
-                    }, cl.end - Date.now())
-                }
-                return;
-            }
+    let chatCooldowns = await model.find({
+        type: "dailychatlb_reset"
+    });
 
-        });
-    })
+    await chatCooldowns.forEach(async cl => {
+        let lb = await dailyLbCollection.get(cl.discord_id);
+        if (lb) {
+            console.log(`found2`);
+            await setTimeout(async () => {
+                await console.log(`Yeah i reset lbs2`);
+                await lb.reset()
+            }, cl.end - Date.now());
+        }
+    });
+
+    return {
+        xpCooldowns,
+        chatCooldowns
+    }
 
 };
 
 
 async function registerWeeklyCooldowns(weeklyLbCollection) {
 
-    return new Promise(async (res, rej) => {
-        let allCooldowns = await model.find();
+    let xpCooldowns = await model.find({
+        type: "weeklylb_reset"
+    });
 
-        await allCooldowns.forEach(cl => {
+    await xpCooldowns.forEach(async cl => {
+        let lb = await dailyLbCollection.get(cl.discord_id);
+        if (lb) {
+            console.log(`found`);
+            await setTimeout(async () => {
+                await console.log(`Yeah i reset lbs`);
+                await lb.reset()
+            }, cl.end - Date.now());
+        }
+    });
 
-            if (cl.type === "weeklylb_reset") {
-                let lb = weeklyLbCollection.get(cl.discord_id);
-                if (lb) {
-                    setTimeout(() => {
-                        lb.reset();
-                    }, cl.end - Date.now())
-                }
-                return;
-            } else if (cl.type === "weeklychatlb_reset") {
-                let lb = weeklyLbCollection.get(cl.discord_id);
-                if (lb) {
-                    setTimeout(() => {
-                        lb.reset();
-                    }, cl.end - Date.now())
-                }
-                return;
-            }
+    let chatCooldowns = await model.find({
+        type: "weeklychatlb_reset"
+    });
 
-        });
-    })
+    await chatCooldowns.forEach(async cl => {
+        let lb = await dailyLbCollection.get(cl.discord_id);
+        if (lb) {
+            console.log(`found2`);
+            await setTimeout(async () => {
+                await console.log(`Yeah i reset lbs2`);
+                await lb.reset()
+            }, cl.end - Date.now());
+        }
+    });
+
+    return {
+        xpCooldowns,
+        chatCooldowns
+    }
 
 };
 
