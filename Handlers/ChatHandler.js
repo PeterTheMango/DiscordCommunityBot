@@ -59,7 +59,7 @@ async function getWeeklyUserData(member) {
     });
 
     if (!q) {
-        q = new WeeklyChat.findOneAndUpdate({
+        q = await WeeklyChat.findOneAndUpdate({
             discord_id: member.id
         }, {
             discord_id: member.id,
