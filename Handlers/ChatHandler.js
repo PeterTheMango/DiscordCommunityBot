@@ -63,7 +63,8 @@ async function getWeeklyUserData(member) {
             discord_id: member.id
         }, {
             discord_id: member.id,
-            messages: 0
+            messages: 0,
+            reward_messages: 0
         }, {
             upsert: true,
             new: true
@@ -138,7 +139,7 @@ async function addMessage(member) {
     }, {
         $set: {
             messages: oldData.messages + 1,
-            reward_messages: oldData.reward_messages
+            reward_messages: oldData.reward_messages + 1
         }
     }, {
         upsert: true,
@@ -149,7 +150,8 @@ async function addMessage(member) {
         discord_id: member.id
     }, {
         $set: {
-            messages: oldWeeklyData.messages + 1
+            messages: oldWeeklyData.messages + 1,
+            reward_messages: oldWeeklyData.reward_messages + 1
         }
     }, {
         upsert: true,

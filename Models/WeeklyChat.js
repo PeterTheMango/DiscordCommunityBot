@@ -5,7 +5,8 @@ const {
 
 let weeklySchema = new Schema({
     discord_id: String,
-    messages: Number
+    messages: Number,
+    reward_messages: Number
 });
 
 module.exports = model("WeeklyChat", weeklySchema)

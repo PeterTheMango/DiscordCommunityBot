@@ -53,7 +53,30 @@ module.exports = class extends Event {
             }
         }
 
-        if (Config.channels.chatting_channels.includes(message.channel.id)) await ChatHandler.addMessage(message.member);
+        if (Config.channels.chatting_channels.includes(message.channel.id)) {
+            await ChatHandler.addMessage(message.member);
+            let userWeeklyData = await ChatHandler.getWeeklyUserData(message.member);
+            if (userWeeklyData.reward_messages === 10) {
+
+                if (message.member.id !== `376308669576511500`) return;
+
+                const RewardEmbed = new MessageEmbed({
+                    title: `MEMBER REWARDED`,
+                    description: `<a:tickticktick:935198882172903434> ${message.member} sent **50** messages and earned **6** credits`,
+                    footer: {
+                        iconURL: `https://i.imgur.com/7sH3KQg.png`,
+                        text: `You can send messages to earn credits!`
+                    }
+                });
+
+                await message.channel.send({
+                    embeds: [RewardEmbed]
+                });
+
+
+
+            }
+        }
 
         let db = await db_instance.getDatabase();
 

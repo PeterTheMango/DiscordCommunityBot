@@ -14,9 +14,9 @@ module.exports = class extends Event {
         console.log(`${bot_name}\n| Created By: Peter S.#0023`.cyan);
 
         await this.client.user.setPresence({
-            status: 'idle',
+            status: 'online',
             activities: [{
-                name: "I am under maintenance! #support for help."
+                name: "#support for help."
             }]
         });
         await this.client.user.setStatus(`idle`);
