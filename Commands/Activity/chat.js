@@ -27,7 +27,7 @@ module.exports = class extends Command {
         let embed = new MessageEmbed({
             color: "#ff00c8",
             title: "Message Activity",
-            description: `${message.member} <:vcbut:964501179247759400> You have sent **msgs** this week in [chats](https://discord.gg/c88dUg5bDk)`
+            description: `${message.member} <a:vcbut:852965552674832384> You have sent **msgs** this week in [chats](https://discord.gg/c88dUg5bDk)`
         });
 
         let wChat = await ChatHandler.getWeeklyUserData(message.member);

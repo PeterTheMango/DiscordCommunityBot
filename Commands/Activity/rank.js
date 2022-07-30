@@ -31,20 +31,22 @@ module.exports = class extends Command {
     async execute(message, args) {
 
 
-        
+
         let noUserEmbed = new MessageEmbed({
             color: `RED`,
             title: `Missing User!`,
             description: `I was not able to find that user!`
         });
-        
-       	let user = message.member;
-        
-        if(args.length < 1) user = message.member;
+
+        let user = message.member;
+
+        if (args.length < 1) user = message.member;
         else user = message.mentions.members.first();
-        
-        if(!user) return message.channel.send({embeds: [noUserEmbed]});
-	
+
+        if (!user) return message.channel.send({
+            embeds: [noUserEmbed]
+        });
+
         let rankEmbed = new MessageEmbed({
             color: "#F8C8DC",
             author: {
@@ -71,7 +73,7 @@ module.exports = class extends Command {
                 text: "You spent {time} in voice-chat!"
             }
         });
-        
+
         let levelData = await getUserLevel(user);
 
         if (!levelData) {

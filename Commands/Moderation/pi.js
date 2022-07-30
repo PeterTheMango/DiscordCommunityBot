@@ -8,7 +8,7 @@ module.exports = class extends Command {
 
     constructor(...args) {
         super(...args, {
-            name: "ic",
+            name: "pi",
             aliases: ["imageclear"],
             category: "moderation",
             description: "Clears messages with images.",
@@ -48,7 +48,7 @@ module.exports = class extends Command {
         await messages.forEach(m => messageIds.push(m.id));
 
         if (messageIds.length < 1) return message.reply({
-            content: `Unable to clear bot messages. No messages found!`
+            content: `Unable to clear images. No images found!`
         });
 
         await message.channel.bulkDelete(messageIds, true);

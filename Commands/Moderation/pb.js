@@ -8,12 +8,12 @@ module.exports = class extends Command {
 
     constructor(...args) {
         super(...args, {
-            name: "bc",
+            name: "pb",
             aliases: ["botclear"],
             category: "moderation",
-            description: "Clears messages sent by bots.",
+            description: "Purges messages sent by bots.",
             usage: "",
-            permissions: [`889999630702632970`]
+            permissions: [`730459275499012127`]
         });
     }
 

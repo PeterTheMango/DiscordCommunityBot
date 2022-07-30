@@ -7,10 +7,10 @@ module.exports = class extends Command {
 
     constructor(...args) {
         super(...args, {
-            name: "rain",
+            name: "frank",
             aliases: [],
             category: "Utilities",
-            description: "Gives a member a rain role.",
+            description: "Gives a member katie's role.",
             usage: "<user>"
         })
     }
@@ -22,13 +22,13 @@ module.exports = class extends Command {
      */
     async execute(message, args) {
 
-        if (![`192715014602358784`, `802625400357781536`].includes(message.author.id)) return;
+        if (message.member.id !== `949677813764620318`) return;
 
-        let role = await message.guild.roles.cache.get(`788489301376761857`);
+        let role = await message.guild.roles.cache.get(`915791389562900540`);
 
         if (!role) return message.react(`❌`);
 
-        if (args.length < 1) return message.reply(`Please provide a user!`);
+        if (args.length < 1) return message.reply(`Please provide a user <a:loveheart:811665342023073882>`);
 
         let user = message.mentions.members.first();
 

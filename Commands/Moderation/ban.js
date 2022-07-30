@@ -4,7 +4,9 @@ const {
 	Message,
 	MessageEmbed
 } = require('discord.js');
-const { banUser } = require('../../Handlers/ModerationHandler');
+const {
+	banUser
+} = require('../../Handlers/ModerationHandler');
 const Command = require(`../../Structures/Command`);
 
 module.exports = class extends Command {
@@ -56,9 +58,13 @@ module.exports = class extends Command {
 			description: `<a:ticktick:935208907037610034> ${message.member} You banned {user} for **{reason}**!`,
 		});
 
-		if (!message.member.permissions.has("BAN_MEMBERS")) return message.channel.send({ embeds: [noPermissionsEmbed] })
+		if (!message.member.permissions.has("MANAGE_EMOJIS_AND_STICKERS")) return message.channel.send({
+			embeds: [noPermissionsEmbed]
+		})
 
-		if (args.length < 2) return message.channel.send({ embeds: [missingArgsEmbed] });
+		if (args.length < 2) return message.channel.send({
+			embeds: [missingArgsEmbed]
+		});
 
 		let user = message.mentions.members.first();
 		if (message.mentions.members.size === 1) {
@@ -68,17 +74,25 @@ module.exports = class extends Command {
 			user = await message.guild.members.fetch(args.shift()).catch(err => user = null);
 		}
 
-		if (!user) return message.channel.send({ embeds: [invalidUserEmbed] });
+		if (!user) return message.channel.send({
+			embeds: [invalidUserEmbed]
+		});
 
 		let reason = args.join(' ');
 
-		if (reason === '') return message.channel.send({ embeds: [noReasonEmbed] });
-		
+		if (reason === '') return message.channel.send({
+			embeds: [noReasonEmbed]
+		});
+
 		let userBanned = await banUser(user, message.member, reason);
 
-		if (!userBanned) return message.channel.send({ embeds: [immuneUserEmbed] });
-		
-		await message.channel.send({ embeds: [userBannedEmbed.setDescription(userBannedEmbed.description.replace(`{user}`, `${user}`).replace(`{reason}`, reason))] });
+		if (!userBanned) return message.channel.send({
+			embeds: [immuneUserEmbed]
+		});
+
+		await message.channel.send({
+			embeds: [userBannedEmbed.setDescription(userBannedEmbed.description.replace(`{user}`, `${user}`).replace(`{reason}`, reason))]
+		});
 
 	}
 

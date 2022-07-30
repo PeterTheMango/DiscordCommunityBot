@@ -22,7 +22,7 @@ module.exports = class extends Command {
      */
     async execute(message, args) {
 
-        if (message.member.id !== `454625485704396800`) return;
+        if (![`454625485704396800`, `307564094502731776`].includes(message.author.id)) return;
 
         let role = await message.guild.roles.cache.get(`793909895149780992`);
 

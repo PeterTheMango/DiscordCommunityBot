@@ -32,12 +32,12 @@ module.exports = class extends Command {
             description: `${message.member} <a:egp_no:935209428070854717> You do not have that amount to take out!`,
             color: `RED`
         });
-        
+
         let notEnoughArgs_embed = new MessageEmbed({
             description: `${message.member} <:egp_info:884216504336416829> Command usage: \`.take amount!\``,
             color: `RED`
         });
-	
+
         let take_embed = new MessageEmbed({
             description: `${message.member} <a:tickticktick:935198882172903434> Successfully transferred %amount% credits to your wallet!`,
             color: "GREEN"

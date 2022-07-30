@@ -103,13 +103,15 @@ module.exports = class extends Command {
 		});
 
 		let userMuted = await muteUser(user, message.member, reason);
-        
-        let msgs = await message.channel.messages.fetch({filter: 100});
-        let userMessages = await msgs.filter(m => m.author.id === user.id);
-        let msgsIds = [];
-        await userMessages.forEach(m => msgsIds.push(m.id));
-        
-        await message.channel.bulkDelete(msgsIds, true)
+
+		let msgs = await message.channel.messages.fetch({
+			filter: 100
+		});
+		let userMessages = await msgs.filter(m => m.author.id === user.id);
+		let msgsIds = [];
+		await userMessages.forEach(m => msgsIds.push(m.id));
+
+		await message.channel.bulkDelete(msgsIds, true)
 
 		if (!userMuted) return message.channel.send({
 			embeds: [immuneUserEmbed]
