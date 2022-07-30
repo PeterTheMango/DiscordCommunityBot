@@ -175,6 +175,28 @@ async function addMessage(member) {
     };
 }
 
+/**
+ * 
+ * @param {GuildMember} member 
+ */
+async function resetWeeklyRewardMessages(member) {
+
+    let userData = await getWeeklyUserData(member);
+    let q = await WeeklyChat.findOneAndUpdate({
+        discord_id: member.id
+    }, {
+        discord_id: member.id,
+        messages: userData.messages,
+        reward_messages: 0
+    }, {
+        upsert: true,
+        new: true
+    });
+
+    return q;
+
+}
+
 module.exports = {
     getAllTimeLeaders,
     getDailyLeaders,
@@ -185,5 +207,6 @@ module.exports = {
     createAllTimeLeaderboard,
     createDailyLeaderboard,
     createWeeklyLeaderboard,
-    addMessage
+    addMessage,
+    resetWeeklyRewardMessages
 }
