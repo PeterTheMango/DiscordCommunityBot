@@ -350,7 +350,7 @@ async function giveLevelRank(member) {
         roles = [];
     }
 
-    await roles.forEach(id => {
+    await roles.forEach(async id => {
         let role = await member.guild.roles.cache.get(id);
         if (!role) return;
         if (!member.roles.cache.get(role.id)) return member.roles.add(role.id);
