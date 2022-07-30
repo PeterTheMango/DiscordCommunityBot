@@ -21,7 +21,7 @@ module.exports = class extends Event {
 
         if (message.author.bot || (message.channel.type === "DM" && !message.content.toLowerCase().includes(`dm`))) return;
 
-        if (![`192715014602358784`, `376308669576511500`].includes(message.author.id)) return;
+        // if (![`192715014602358784`, `376308669576511500`].includes(message.author.id)) return;
 
         let hasRobCooldown = await CooldownManager.findOne({
             discord_id: message.member.id,
@@ -56,7 +56,6 @@ module.exports = class extends Event {
         if (Config.channels.chatting_channels.includes(message.channel.id)) {
             await ChatHandler.addMessage(message.member);
             let userWeeklyData = await ChatHandler.getWeeklyUserData(message.member);
-            if (message.member.id !== `376308669576511500`) return;
             if (userWeeklyData.reward_messages === 10) {
 
                 const RewardEmbed = new MessageEmbed({
@@ -100,7 +99,7 @@ module.exports = class extends Event {
                                 .replace(`{messages}`, rewardMessages.toString())
                                 .replace(`{role}`, `${role}`)
                             )
-                            .setImage(`https://i.imgur.com/JP6JYOd.png`)
+                            .setThumbnail(`https://i.imgur.com/JP6JYOd.png`)
                         ]
                     });
                 }
@@ -119,7 +118,7 @@ module.exports = class extends Event {
                                 .replace(`{messages}`, rewardMessages.toString())
                                 .replace(`{role}`, `${role}`)
                             )
-                            .setImage(`https://i.imgur.com/vPy4GCZ.png`)
+                            .setThumbnail(`https://i.imgur.com/vPy4GCZ.png`)
                         ]
                     });
                 }
@@ -138,7 +137,7 @@ module.exports = class extends Event {
                                 .replace(`{messages}`, rewardMessages.toString())
                                 .replace(`{role}`, `${role}`)
                             )
-                            .setImage(`https://i.imgur.com/JU8L3jo.png`)
+                            .setThumbnail(`https://i.imgur.com/JU8L3jo.png`)
                         ]
                     });
                 }
@@ -157,7 +156,7 @@ module.exports = class extends Event {
                                 .replace(`{messages}`, rewardMessages.toString())
                                 .replace(`{role}`, `${role}`)
                             )
-                            .setImage(`https://i.imgur.com/e8TWxHE.png`)
+                            .setThumbnail(`https://i.imgur.com/e8TWxHE.png`)
                         ]
                     });
                 }
@@ -176,7 +175,7 @@ module.exports = class extends Event {
                                 .replace(`{messages}`, rewardMessages.toString())
                                 .replace(`{role}`, `${role}`)
                             )
-                            .setImage(`https://i.imgur.com/uib9SRh.png`)
+                            .setThumbnail(`https://i.imgur.com/uib9SRh.png`)
                         ]
                     });
                 }
@@ -195,7 +194,7 @@ module.exports = class extends Event {
                                 .replace(`{messages}`, rewardMessages.toString())
                                 .replace(`{role}`, `${role}`)
                             )
-                            .setImage(`https://i.imgur.com/CtZS6A6.png`)
+                            .setThumbnail(`https://i.imgur.com/CtZS6A6.png`)
                         ]
                     });
                 }
@@ -214,7 +213,7 @@ module.exports = class extends Event {
                                 .replace(`{messages}`, rewardMessages.toString())
                                 .replace(`{role}`, `${role}`)
                             )
-                            .setImage(`https://i.imgur.com/e0waPi4.png`)
+                            .setThumbnail(`https://i.imgur.com/e0waPi4.png`)
                         ]
                     });
                 }
@@ -233,7 +232,7 @@ module.exports = class extends Event {
                                 .replace(`{messages}`, rewardMessages.toString())
                                 .replace(`{role}`, `${role}`)
                             )
-                            .setImage(`https://i.imgur.com/FM8rD9i.png`)
+                            .setThumbnail(`https://i.imgur.com/FM8rD9i.png`)
                         ]
                     });
                 }
@@ -252,7 +251,7 @@ module.exports = class extends Event {
                                 .replace(`{messages}`, rewardMessages.toString())
                                 .replace(`{role}`, `${role}`)
                             )
-                            .setImage(`https://i.imgur.com/U5L4yXD.png`)
+                            .setThumbnail(`https://i.imgur.com/U5L4yXD.png`)
                         ]
                     });
                 }
@@ -271,7 +270,7 @@ module.exports = class extends Event {
                                 .replace(`{messages}`, rewardMessages.toString())
                                 .replace(`{role}`, `${role}`)
                             )
-                            .setImage(`https://i.imgur.com/h37fvmA.png`)
+                            .setThumbnail(`https://i.imgur.com/h37fvmA.png`)
                         ]
                     });
                 }
@@ -290,7 +289,7 @@ module.exports = class extends Event {
                                 .replace(`{messages}`, rewardMessages.toString())
                                 .replace(`{role}`, `${role}`)
                             )
-                            .setImage(`https://i.imgur.com/QKrcMjC.png`)
+                            .setThumbnail(`https://i.imgur.com/QKrcMjC.png`)
                         ]
                     });
                 }
