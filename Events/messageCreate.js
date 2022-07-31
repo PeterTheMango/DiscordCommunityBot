@@ -65,7 +65,8 @@ module.exports = class extends Event {
                     footer: {
                         iconURL: `https://i.imgur.com/7sH3KQg.png`,
                         text: `You can send messages to earn credits!`
-                    }
+                    },
+                    color: `GREEN`
                 });
 
                 await message.channel.send({
@@ -87,7 +88,8 @@ module.exports = class extends Event {
                 footer: {
                     iconURL: `https://i.imgur.com/7sH3KQg.png`,
                     text: `You can send messages to earn roles!`
-                }
+                },
+                color: `RANDOM`
             });
             if (messageData.reward_messages === 250) {
 
