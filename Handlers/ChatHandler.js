@@ -135,7 +135,6 @@ async function createWeeklyLeaderboard(channel) {
 async function addMessage(member) {
     if (!member) return;
     let oldData = await getUserData(member);
-    console.log(oldData)
     let newData = await Chat.findOneAndUpdate({
         discord_id: member.id
     }, {
@@ -147,7 +146,7 @@ async function addMessage(member) {
     }, {
         upsert: true,
         new: true
-    });
+    }).catch(err => console.log(`1`));
     let oldWeeklyData = await getWeeklyUserData(member);
     let newWeeklyData = await WeeklyChat.findOneAndUpdate({
         discord_id: member.id
@@ -160,7 +159,7 @@ async function addMessage(member) {
     }, {
         upsert: true,
         new: true
-    });
+    }).catch(err => console.log(`2`));
     let oldDailyData = await getDailyUserData(member);
     let newDailyData = await DailyChat.findOneAndUpdate({
         discord_id: member.id
@@ -172,7 +171,7 @@ async function addMessage(member) {
     }, {
         upsert: true,
         new: true
-    });
+    }).catch(err => console.log(`3`));
     return {
         newData,
         newWeeklyData,
