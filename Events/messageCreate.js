@@ -54,252 +54,252 @@ module.exports = class extends Event {
             }
         }
 
-        // if (Config.channels.chatting_channels.includes(message.channel.id)) {
-        //     await ChatHandler.addMessage(message.member);
-        //     let userWeeklyData = await ChatHandler.getWeeklyUserData(message.member);
-        //     if (userWeeklyData.reward_messages === 10) {
+        if (Config.channels.chatting_channels.includes(message.channel.id)) {
+            await ChatHandler.addMessage(message.member);
+            let userWeeklyData = await ChatHandler.getWeeklyUserData(message.member);
+            if (userWeeklyData.reward_messages === 10) {
 
-        //         const RewardEmbed = new MessageEmbed({
-        //             title: `MEMBER REWARDED`,
-        //             description: `<a:tickticktick:935198882172903434> ${message.member} sent **50** messages and earned **6** credits`,
-        //             footer: {
-        //                 iconURL: `https://i.imgur.com/7sH3KQg.png`,
-        //                 text: `You can send messages to earn credits!`
-        //             }
-        //         });
+                const RewardEmbed = new MessageEmbed({
+                    title: `MEMBER REWARDED`,
+                    description: `<a:tickticktick:935198882172903434> ${message.member} talked and earned **6** credits`,
+                    footer: {
+                        iconURL: `https://i.imgur.com/7sH3KQg.png`,
+                        text: `You can send messages to earn credits!`
+                    }
+                });
 
-        //         await message.channel.send({
-        //             embeds: [RewardEmbed]
-        //         });
+                await message.channel.send({
+                    embeds: [RewardEmbed]
+                });
 
-        //         let userBalance = await EconmyHandler.getBalance(message.member.id)
-        //         await EconmyHandler.updateBalance(message.member.id, userBalance.wallet + 6, userBalance.stored);
+                let userBalance = await EconmyHandler.getBalance(message.member.id)
+                await EconmyHandler.updateBalance(message.member.id, userBalance.wallet + 6, userBalance.stored);
 
-        //         await ChatHandler.resetWeeklyRewardMessages(message.member);
+                await ChatHandler.resetWeeklyRewardMessages(message.member);
 
-        //     }
+            }
 
-        //     let messageData = await ChatHandler.getUserData(message.member);
-        //     let roleID, rewardMessages;
-        //     let roleRewardEmbed = new MessageEmbed({
-        //         title: `MEMBER REWARDED!`,
-        //         description: `<a:blue_diamond:941834977337810944> ${message.member} sent **{messages}** messages and earned the {role} role!`,
-        //         footer: {
-        //             iconURL: `https://i.imgur.com/7sH3KQg.png`,
-        //             text: `You can send messages to earn roles!`
-        //         }
-        //     });
-        //     if (messageData.reward_messages === 250) {
+            let messageData = await ChatHandler.getUserData(message.member);
+            let roleID, rewardMessages;
+            let roleRewardEmbed = new MessageEmbed({
+                title: `MEMBER REWARDED!`,
+                description: `<a:blue_diamond:941834977337810944> ${message.member} sent **{messages}** messages and earned the {role} role!`,
+                footer: {
+                    iconURL: `https://i.imgur.com/7sH3KQg.png`,
+                    text: `You can send messages to earn roles!`
+                }
+            });
+            if (messageData.reward_messages === 250) {
 
-        //         roleID = "870709033240232008";
-        //         rewardMessages = 250;
-        //         let role = await message.guild.roles.cache.get(roleID);
-        //         if (role) {
-        //             await message.member.roles.add(role.id);
-        //             await message.channel.send({
-        //                 embeds: [
-        //                     roleRewardEmbed
-        //                     .setDescription(roleRewardEmbed.description
-        //                         .replace(`{messages}`, rewardMessages.toString())
-        //                         .replace(`{role}`, `${role}`)
-        //                     )
-        //                     .setThumbnail(`https://i.imgur.com/JP6JYOd.png`)
-        //                 ]
-        //             });
-        //         }
+                roleID = "870709033240232008";
+                rewardMessages = 250;
+                let role = await message.guild.roles.cache.get(roleID);
+                if (role) {
+                    await message.member.roles.add(role.id);
+                    await message.channel.send({
+                        embeds: [
+                            roleRewardEmbed
+                            .setDescription(roleRewardEmbed.description
+                                .replace(`{messages}`, rewardMessages.toString())
+                                .replace(`{role}`, `${role}`)
+                            )
+                            .setThumbnail(`https://i.imgur.com/JP6JYOd.png`)
+                        ]
+                    });
+                }
 
-        //     } else if (messageData.reward_messages === 750) {
+            } else if (messageData.reward_messages === 750) {
 
-        //         roleID = "870709057202303067";
-        //         rewardMessages = 500;
-        //         let role = await message.guild.roles.cache.get(roleID);
-        //         if (role) {
-        //             await message.member.roles.add(role.id);
-        //             await message.channel.send({
-        //                 embeds: [
-        //                     roleRewardEmbed
-        //                     .setDescription(roleRewardEmbed.description
-        //                         .replace(`{messages}`, rewardMessages.toString())
-        //                         .replace(`{role}`, `${role}`)
-        //                     )
-        //                     .setThumbnail(`https://i.imgur.com/vPy4GCZ.png`)
-        //                 ]
-        //             });
-        //         }
+                roleID = "870709057202303067";
+                rewardMessages = 500;
+                let role = await message.guild.roles.cache.get(roleID);
+                if (role) {
+                    await message.member.roles.add(role.id);
+                    await message.channel.send({
+                        embeds: [
+                            roleRewardEmbed
+                            .setDescription(roleRewardEmbed.description
+                                .replace(`{messages}`, rewardMessages.toString())
+                                .replace(`{role}`, `${role}`)
+                            )
+                            .setThumbnail(`https://i.imgur.com/vPy4GCZ.png`)
+                        ]
+                    });
+                }
 
-        //     } else if (messageData.reward_messages === 1750) {
+            } else if (messageData.reward_messages === 1750) {
 
-        //         roleID = "870709033240232008";
-        //         rewardMessages = 1000;
-        //         let role = await message.guild.roles.cache.get(roleID);
-        //         if (role) {
-        //             await message.member.roles.add(role.id);
-        //             await message.channel.send({
-        //                 embeds: [
-        //                     roleRewardEmbed
-        //                     .setDescription(roleRewardEmbed.description
-        //                         .replace(`{messages}`, rewardMessages.toString())
-        //                         .replace(`{role}`, `${role}`)
-        //                     )
-        //                     .setThumbnail(`https://i.imgur.com/JU8L3jo.png`)
-        //                 ]
-        //             });
-        //         }
+                roleID = "870708917125132308";
+                rewardMessages = 1000;
+                let role = await message.guild.roles.cache.get(roleID);
+                if (role) {
+                    await message.member.roles.add(role.id);
+                    await message.channel.send({
+                        embeds: [
+                            roleRewardEmbed
+                            .setDescription(roleRewardEmbed.description
+                                .replace(`{messages}`, rewardMessages.toString())
+                                .replace(`{role}`, `${role}`)
+                            )
+                            .setThumbnail(`https://i.imgur.com/JU8L3jo.png`)
+                        ]
+                    });
+                }
 
-        //     } else if (messageData.reward_messages === 3250) {
+            } else if (messageData.reward_messages === 3250) {
 
-        //         roleID = "870709033240232008";
-        //         rewardMessages = 1500;
-        //         let role = await message.guild.roles.cache.get(roleID);
-        //         if (role) {
-        //             await message.member.roles.add(role.id);
-        //             await message.channel.send({
-        //                 embeds: [
-        //                     roleRewardEmbed
-        //                     .setDescription(roleRewardEmbed.description
-        //                         .replace(`{messages}`, rewardMessages.toString())
-        //                         .replace(`{role}`, `${role}`)
-        //                     )
-        //                     .setThumbnail(`https://i.imgur.com/e8TWxHE.png`)
-        //                 ]
-        //             });
-        //         }
+                roleID = "870708960905273404";
+                rewardMessages = 1500;
+                let role = await message.guild.roles.cache.get(roleID);
+                if (role) {
+                    await message.member.roles.add(role.id);
+                    await message.channel.send({
+                        embeds: [
+                            roleRewardEmbed
+                            .setDescription(roleRewardEmbed.description
+                                .replace(`{messages}`, rewardMessages.toString())
+                                .replace(`{role}`, `${role}`)
+                            )
+                            .setThumbnail(`https://i.imgur.com/e8TWxHE.png`)
+                        ]
+                    });
+                }
 
-        //     } else if (messageData.reward_messages === 5250) {
+            } else if (messageData.reward_messages === 5250) {
 
-        //         roleID = "870709033240232008";
-        //         rewardMessages = 2000;
-        //         let role = await message.guild.roles.cache.get(roleID);
-        //         if (role) {
-        //             await message.member.roles.add(role.id);
-        //             await message.channel.send({
-        //                 embeds: [
-        //                     roleRewardEmbed
-        //                     .setDescription(roleRewardEmbed.description
-        //                         .replace(`{messages}`, rewardMessages.toString())
-        //                         .replace(`{role}`, `${role}`)
-        //                     )
-        //                     .setThumbnail(`https://i.imgur.com/uib9SRh.png`)
-        //                 ]
-        //             });
-        //         }
+                roleID = "895352575723995146";
+                rewardMessages = 2000;
+                let role = await message.guild.roles.cache.get(roleID);
+                if (role) {
+                    await message.member.roles.add(role.id);
+                    await message.channel.send({
+                        embeds: [
+                            roleRewardEmbed
+                            .setDescription(roleRewardEmbed.description
+                                .replace(`{messages}`, rewardMessages.toString())
+                                .replace(`{role}`, `${role}`)
+                            )
+                            .setThumbnail(`https://i.imgur.com/uib9SRh.png`)
+                        ]
+                    });
+                }
 
-        //     } else if (messageData.reward_messages === 11250) {
+            } else if (messageData.reward_messages === 11250) {
 
-        //         roleID = "870709033240232008";
-        //         rewardMessages = 6000;
-        //         let role = await message.guild.roles.cache.get(roleID);
-        //         if (role) {
-        //             await message.member.roles.add(role.id);
-        //             await message.channel.send({
-        //                 embeds: [
-        //                     roleRewardEmbed
-        //                     .setDescription(roleRewardEmbed.description
-        //                         .replace(`{messages}`, rewardMessages.toString())
-        //                         .replace(`{role}`, `${role}`)
-        //                     )
-        //                     .setThumbnail(`https://i.imgur.com/CtZS6A6.png`)
-        //                 ]
-        //             });
-        //         }
+                roleID = "895352455796248627";
+                rewardMessages = 6000;
+                let role = await message.guild.roles.cache.get(roleID);
+                if (role) {
+                    await message.member.roles.add(role.id);
+                    await message.channel.send({
+                        embeds: [
+                            roleRewardEmbed
+                            .setDescription(roleRewardEmbed.description
+                                .replace(`{messages}`, rewardMessages.toString())
+                                .replace(`{role}`, `${role}`)
+                            )
+                            .setThumbnail(`https://i.imgur.com/CtZS6A6.png`)
+                        ]
+                    });
+                }
 
-        //     } else if (messageData.reward_messages === 17250) {
+            } else if (messageData.reward_messages === 17250) {
 
-        //         roleID = "870709033240232008";
-        //         rewardMessages = 6000;
-        //         let role = await message.guild.roles.cache.get(roleID);
-        //         if (role) {
-        //             await message.member.roles.add(role.id);
-        //             await message.channel.send({
-        //                 embeds: [
-        //                     roleRewardEmbed
-        //                     .setDescription(roleRewardEmbed.description
-        //                         .replace(`{messages}`, rewardMessages.toString())
-        //                         .replace(`{role}`, `${role}`)
-        //                     )
-        //                     .setThumbnail(`https://i.imgur.com/e0waPi4.png`)
-        //                 ]
-        //             });
-        //         }
+                roleID = "895352667881242654";
+                rewardMessages = 6000;
+                let role = await message.guild.roles.cache.get(roleID);
+                if (role) {
+                    await message.member.roles.add(role.id);
+                    await message.channel.send({
+                        embeds: [
+                            roleRewardEmbed
+                            .setDescription(roleRewardEmbed.description
+                                .replace(`{messages}`, rewardMessages.toString())
+                                .replace(`{role}`, `${role}`)
+                            )
+                            .setThumbnail(`https://i.imgur.com/e0waPi4.png`)
+                        ]
+                    });
+                }
 
-        //     } else if (messageData.reward_messages === 25250) {
+            } else if (messageData.reward_messages === 25250) {
 
-        //         roleID = "870709033240232008";
-        //         rewardMessages = 8000;
-        //         let role = await message.guild.roles.cache.get(roleID);
-        //         if (role) {
-        //             await message.member.roles.add(role.id);
-        //             await message.channel.send({
-        //                 embeds: [
-        //                     roleRewardEmbed
-        //                     .setDescription(roleRewardEmbed.description
-        //                         .replace(`{messages}`, rewardMessages.toString())
-        //                         .replace(`{role}`, `${role}`)
-        //                     )
-        //                     .setThumbnail(`https://i.imgur.com/FM8rD9i.png`)
-        //                 ]
-        //             });
-        //         }
+                roleID = "895352298228838442";
+                rewardMessages = 8000;
+                let role = await message.guild.roles.cache.get(roleID);
+                if (role) {
+                    await message.member.roles.add(role.id);
+                    await message.channel.send({
+                        embeds: [
+                            roleRewardEmbed
+                            .setDescription(roleRewardEmbed.description
+                                .replace(`{messages}`, rewardMessages.toString())
+                                .replace(`{role}`, `${role}`)
+                            )
+                            .setThumbnail(`https://i.imgur.com/FM8rD9i.png`)
+                        ]
+                    });
+                }
 
-        //     } else if (messageData.reward_messages === 35250) {
+            } else if (messageData.reward_messages === 35250) {
 
-        //         roleID = "870709033240232008";
-        //         rewardMessages = 10000;
-        //         let role = await message.guild.roles.cache.get(roleID);
-        //         if (role) {
-        //             await message.member.roles.add(role.id);
-        //             await message.channel.send({
-        //                 embeds: [
-        //                     roleRewardEmbed
-        //                     .setDescription(roleRewardEmbed.description
-        //                         .replace(`{messages}`, rewardMessages.toString())
-        //                         .replace(`{role}`, `${role}`)
-        //                     )
-        //                     .setThumbnail(`https://i.imgur.com/U5L4yXD.png`)
-        //                 ]
-        //             });
-        //         }
+                roleID = "895352324590039060";
+                rewardMessages = 10000;
+                let role = await message.guild.roles.cache.get(roleID);
+                if (role) {
+                    await message.member.roles.add(role.id);
+                    await message.channel.send({
+                        embeds: [
+                            roleRewardEmbed
+                            .setDescription(roleRewardEmbed.description
+                                .replace(`{messages}`, rewardMessages.toString())
+                                .replace(`{role}`, `${role}`)
+                            )
+                            .setThumbnail(`https://i.imgur.com/U5L4yXD.png`)
+                        ]
+                    });
+                }
 
-        //     } else if (messageData.reward_messages === 55250) {
+            } else if (messageData.reward_messages === 55250) {
 
-        //         roleID = "870709033240232008";
-        //         rewardMessages = 20000;
-        //         let role = await message.guild.roles.cache.get(roleID);
-        //         if (role) {
-        //             await message.member.roles.add(role.id);
-        //             await message.channel.send({
-        //                 embeds: [
-        //                     roleRewardEmbed
-        //                     .setDescription(roleRewardEmbed.description
-        //                         .replace(`{messages}`, rewardMessages.toString())
-        //                         .replace(`{role}`, `${role}`)
-        //                     )
-        //                     .setThumbnail(`https://i.imgur.com/h37fvmA.png`)
-        //                 ]
-        //             });
-        //         }
+                roleID = "870709033240232008";
+                rewardMessages = 20000;
+                let role = await message.guild.roles.cache.get(roleID);
+                if (role) {
+                    await message.member.roles.add(role.id);
+                    await message.channel.send({
+                        embeds: [
+                            roleRewardEmbed
+                            .setDescription(roleRewardEmbed.description
+                                .replace(`{messages}`, rewardMessages.toString())
+                                .replace(`{role}`, `${role}`)
+                            )
+                            .setThumbnail(`https://i.imgur.com/h37fvmA.png`)
+                        ]
+                    });
+                }
 
-        //     } else if (messageData.reward_messages === 82250) {
+            } else if (messageData.reward_messages === 82250) {
 
-        //         roleID = "870709033240232008";
-        //         rewardMessages = 30000;
-        //         let role = await message.guild.roles.cache.get(roleID);
-        //         if (role) {
-        //             await message.member.roles.add(role.id);
-        //             await message.channel.send({
-        //                 embeds: [
-        //                     roleRewardEmbed
-        //                     .setDescription(roleRewardEmbed.description
-        //                         .replace(`{messages}`, rewardMessages.toString())
-        //                         .replace(`{role}`, `${role}`)
-        //                     )
-        //                     .setThumbnail(`https://i.imgur.com/QKrcMjC.png`)
-        //                 ]
-        //             });
-        //         }
+                roleID = "870709033240232008";
+                rewardMessages = 30000;
+                let role = await message.guild.roles.cache.get(roleID);
+                if (role) {
+                    await message.member.roles.add(role.id);
+                    await message.channel.send({
+                        embeds: [
+                            roleRewardEmbed
+                            .setDescription(roleRewardEmbed.description
+                                .replace(`{messages}`, rewardMessages.toString())
+                                .replace(`{role}`, `${role}`)
+                            )
+                            .setThumbnail(`https://i.imgur.com/QKrcMjC.png`)
+                        ]
+                    });
+                }
 
-        //     }
-        // }
+            }
+        }
 
         let db = await db_instance.getDatabase();
 
