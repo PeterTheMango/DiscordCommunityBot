@@ -133,6 +133,7 @@ async function createWeeklyLeaderboard(channel) {
  * @param {GuildMember} member 
  */
 async function addMessage(member) {
+    if (!member) return;
     let oldData = await getUserData(member);
     let newData = await Chat.findOneAndUpdate({
         discord_id: member.id
@@ -146,8 +147,6 @@ async function addMessage(member) {
         upsert: true,
         new: true
     });
-    console.log(oldData)
-    console.log(newData)
     let oldWeeklyData = await getWeeklyUserData(member);
     let newWeeklyData = await WeeklyChat.findOneAndUpdate({
         discord_id: member.id
