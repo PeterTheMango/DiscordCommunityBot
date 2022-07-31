@@ -145,29 +145,29 @@ async function addMessage(member) {
         upsert: true,
         new: true
     });
-    let oldWeeklyData = await getWeeklyUserData(member);
-    let newWeeklyData = await WeeklyChat.findOneAndUpdate({
-        discord_id: member.id
-    }, {
-        $set: {
-            messages: oldWeeklyData.messages + 1,
-            reward_messages: oldWeeklyData.reward_messages + 1
-        }
-    }, {
-        upsert: true,
-        new: true
-    });
-    let oldDailyData = await getDailyUserData(member);
-    let newDailyData = await DailyChat.findOneAndUpdate({
-        discord_id: member.id
-    }, {
-        $set: {
-            messages: oldDailyData.messages + 1
-        }
-    }, {
-        upsert: true,
-        new: true
-    });
+    // let oldWeeklyData = await getWeeklyUserData(member);
+    // let newWeeklyData = await WeeklyChat.findOneAndUpdate({
+    //     discord_id: member.id
+    // }, {
+    //     $set: {
+    //         messages: oldWeeklyData.messages + 1,
+    //         reward_messages: oldWeeklyData.reward_messages + 1
+    //     }
+    // }, {
+    //     upsert: true,
+    //     new: true
+    // });
+    // let oldDailyData = await getDailyUserData(member);
+    // let newDailyData = await DailyChat.findOneAndUpdate({
+    //     discord_id: member.id
+    // }, {
+    //     $set: {
+    //         messages: oldDailyData.messages + 1
+    //     }
+    // }, {
+    //     upsert: true,
+    //     new: true
+    // });
     return {
         newData,
         newWeeklyData,
