@@ -55,7 +55,7 @@ module.exports = class extends Event {
         }
 
         if (Config.channels.chatting_channels.includes(message.channel.id)) {
-            await ChatHandler.addMessage(message.member).catch(err => console.log(err));
+            await ChatHandler.addMessage(message.member).catch(err => console.log(message.member.id));
             let userWeeklyData = await ChatHandler.getWeeklyUserData(message.member);
             if (userWeeklyData.reward_messages === 50) {
 
