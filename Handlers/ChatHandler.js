@@ -81,7 +81,6 @@ async function getDailyUserData(member) {
     let q = await DailyChat.findOne({
         discord_id: member.id
     });
-    console.log(q);
     if (!q) {
         q = await DailyChat.findOneAndUpdate({
             discord_id: member.id
@@ -93,7 +92,6 @@ async function getDailyUserData(member) {
             new: true
         });
     }
-    console.log(q)
     return q;
 };
 
@@ -137,6 +135,7 @@ async function createWeeklyLeaderboard(channel) {
 async function addMessage(member) {
     if (!member) return;
     let oldData = await getUserData(member);
+    console.log(oldData)
     let newData = await Chat.findOneAndUpdate({
         discord_id: member.id
     }, {
