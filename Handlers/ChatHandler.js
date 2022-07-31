@@ -146,16 +146,15 @@ async function addMessage(member) {
     }, {
         upsert: true,
         new: true
-    }).catch(err => console.log(`1`));
+    })
     let oldWeeklyData = await getWeeklyUserData(member);
+    console.log(oldWeeklyData)
     let newWeeklyData = await WeeklyChat.findOneAndUpdate({
         discord_id: member.id
     }, {
-
         discord_id: member.id,
         messages: oldWeeklyData.messages + 1,
         reward_messages: oldWeeklyData.reward_messages + 1
-
     }, {
         upsert: true,
         new: true
@@ -171,7 +170,7 @@ async function addMessage(member) {
     }, {
         upsert: true,
         new: true
-    }).catch(err => console.log(`3`));
+    });
     return {
         newData,
         newWeeklyData,

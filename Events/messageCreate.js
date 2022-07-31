@@ -57,7 +57,7 @@ module.exports = class extends Event {
         if (Config.channels.chatting_channels.includes(message.channel.id)) {
             await ChatHandler.addMessage(message.member);
             let userWeeklyData = await ChatHandler.getWeeklyUserData(message.member);
-            if (userWeeklyData.reward_messages === 50) {
+            if (userWeeklyData.reward_messages >= 50) {
 
                 const RewardEmbed = new MessageEmbed({
                     title: `MEMBER REWARDED`,
