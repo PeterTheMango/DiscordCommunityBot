@@ -1,13 +1,13 @@
 {
-    "token": "NzQyNTEwMTE4Mjg1MDgyNzE2.XzHKbw.rcdOEP54Z7EYc6TmWwRPNkP1-WI",
+    "token": "",
     "novcRole": "767533847990239282",
     "helperRole": "730459275499012127",
     "vcMod": "730459276337741964",
     "database": {
-        "username": "nyaa",
-        "password": "WTHaBwGVtr2UZ",
-        "host": "clients.peterthemango.me",
-        "port": "25718"
+        "username": "",
+        "password": "",
+        "host": "",
+        "port": ""
     },
     "channels": {
         "bot_logs": "895352087431479316",
