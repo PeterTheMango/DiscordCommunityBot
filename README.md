@@ -1,0 +1,2 @@
+# Discord Community Bot
+This is where the source code can be found for one of my old projects that allowed users to interact with a bot application on discord where they were able to access a wide variety of commands for social interaction. It also added functionality where the voice module could be ran on a separate instance where they track user information when connected to voice channels like how long have they been in there and which channels they are on and rewards them based on how often they use it.
